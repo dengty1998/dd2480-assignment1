@@ -1,5 +1,6 @@
 package main;
 
+//Input for the decide function
 public class Input {
     private int NUMPOINTS;
     private int[][] POINTS;
