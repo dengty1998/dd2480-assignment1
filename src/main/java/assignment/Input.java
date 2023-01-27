@@ -1,6 +1,6 @@
 package assignment;
 
-//Input for the decide function
+// Input for the decide function
 public class Input {
     private int NUMPOINTS;
     private int[][] POINTS;
