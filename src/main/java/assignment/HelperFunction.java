@@ -1,4 +1,4 @@
-package main;
+package assignment;
 
 public class HelperFunction {
     public static double calculateDistance(int[] point1, int[] point2) {

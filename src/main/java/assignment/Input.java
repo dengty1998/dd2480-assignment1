@@ -1,4 +1,4 @@
-package main;
+package assignment;
 
 //Input for the decide function
 public class Input {

@@ -1,4 +1,4 @@
-package main;
+package assignment;
 
 public class Parameters {
     private double LENGTH1;
