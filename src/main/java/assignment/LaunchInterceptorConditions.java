@@ -128,14 +128,7 @@ public class LaunchInterceptorConditions {
             return false;
         }
         for (int i = 0; i < POINTS.length - K_PTS - 1; ++i) {
-            boolean isLess = true;
-            for (int j = i; j < i + K_PTS; ++j) {
-                if (HelperFunction.calculateDistance(POINTS[j], POINTS[j + 1]) >= LENGTH2) {
-                    isLess = false;
-                    break;
-                }
-            }
-            if (isLess) {
+            if (HelperFunction.calculateDistance(POINTS[i], POINTS[i + K_PTS]) < LENGTH2) {
                 return true;
             }
         }
