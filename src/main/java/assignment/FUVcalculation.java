@@ -11,13 +11,11 @@ public class FUVcalculation {
                 FUV[i] = true;
             }
             else{
+                FUV[i] = true;
                 for(int j = 0; j < 15; j++){
                     if(!PUM[i][j]){
                         FUV[i] = false;
                         break;
-                    }
-                    else{
-                        FUV[i] = true;
                     }
                 }
             }
