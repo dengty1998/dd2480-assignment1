@@ -6,9 +6,9 @@ public class Input {
     private int[][] POINTS;
     private Parameters PARAMETERS;
     private Connect[][] LCM;
-    private int[] PUV;
+    private boolean[] PUV;
 
-    public Input(int NUMPOINTS, int[][] POINTS, Parameters PARAMETERS, Connect[][] LCM, int[] PUV) {
+    public Input(int NUMPOINTS, int[][] POINTS, Parameters PARAMETERS, Connect[][] LCM, boolean[] PUV) {
         this.NUMPOINTS = NUMPOINTS;
         this.POINTS = POINTS;
         this.PARAMETERS = PARAMETERS;
@@ -32,7 +32,7 @@ public class Input {
         return LCM;
     }
 
-    public int[] getPUV() {
+    public boolean[] getPUV() {
         return PUV;
     }
 }
