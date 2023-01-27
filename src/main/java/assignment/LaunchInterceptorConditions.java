@@ -122,9 +122,24 @@ public class LaunchInterceptorConditions {
         return false;
     }
 
-    public static boolean ConditionTwelve(int KPTS, double LENGTH2, int NUMPOINTS, int[][] POINTS) {
-        // do something
-        return true;
+    public static boolean ConditionTwelve(int K_PTS, double LENGTH1, double LENGTH2,
+                    int[][] POINTS) {
+        if (!ConditionSeven(LENGTH1, K_PTS, POINTS.length, POINTS)) {
+            return false;
+        }
+        for (int i = 0; i < POINTS.length - K_PTS - 1; ++i) {
+            boolean isLess = true;
+            for (int j = i; j < i + K_PTS; ++j) {
+                if (HelperFunction.calculateDistance(POINTS[j], POINTS[j + 1]) >= LENGTH2) {
+                    isLess = false;
+                    break;
+                }
+            }
+            if (isLess) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static boolean ConditionThirteen(int APTS, int BPTS, double RADIUS1, double RADIUS2, int NUMPOINTS,
