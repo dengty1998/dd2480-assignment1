@@ -2,7 +2,7 @@
 
 **Warning: This is a university project of no use.**
 
-This is an implementation of DECIDE function, described in [the specification](https://canvas.kth.se/courses/37918/files/6157550/download)
+This is an implementation of DECIDE function, described in [the specification](https://canvas.kth.se/courses/37918/files/6157550/download).
 
 ## Building
 
@@ -14,7 +14,7 @@ mvn clean verify
 
 ## Code Style
 
-The code style is enforced by the build system. The file describing the formatting rules is `format.xml`, it is in the Eclipse file-format. You can use Maven to automatically apply the code style by running:
+The code style is enforced by the build system. The file describing the formatting rules is `format.xml`, it is in the Eclipse file-format. The code style is based on [Google Java Style Guide](https://google.github.io/styleguide/javaguide.html) with indentation by 4 spaces instead of 2. You can use Maven to automatically apply the code style by running:
 
 ```
 mvn spotless:apply

@@ -6,14 +6,13 @@ public class FUVcalculation {
 
         boolean[] FUV = new boolean[15];
 
-        for(int i = 0; i < 15; i++){
-            if(!PUV[i]){
+        for (int i = 0; i < 15; i++) {
+            if (!PUV[i]) {
                 FUV[i] = true;
-            }
-            else{
+            } else {
                 FUV[i] = true;
-                for(int j = 0; j < 15; j++){
-                    if(!PUM[i][j]){
+                for (int j = 0; j < 15; j++) {
+                    if (!PUM[i][j]) {
                         FUV[i] = false;
                         break;
                     }
