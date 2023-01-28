@@ -1,8 +1,8 @@
-package main;
+package assignment;
 
 public class Main {
     public static void main(String[] args) {
-        //run function DECIDE
+        // run function DECIDE
         System.out.println("Hello World");
     }
 }
