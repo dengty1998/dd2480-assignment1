@@ -1,6 +1,6 @@
 package assignment;
 
-//Input for the decide function
+// Input for the decide function
 public class Input {
     private int NUMPOINTS;
     private int[][] POINTS;
@@ -8,7 +8,8 @@ public class Input {
     private Connect[][] LCM;
     private boolean[] PUV;
 
-    public Input(int NUMPOINTS, int[][] POINTS, Parameters PARAMETERS, Connect[][] LCM, boolean[] PUV) {
+    public Input(int NUMPOINTS, int[][] POINTS, Parameters PARAMETERS, Connect[][] LCM,
+                    boolean[] PUV) {
         this.NUMPOINTS = NUMPOINTS;
         this.POINTS = POINTS;
         this.PARAMETERS = PARAMETERS;
