@@ -51,7 +51,7 @@ public class LaunchInterceptorConditions {
 
         for(int i = 0; i < POINTS.length - QPTS -1; i++){
             boolean[] FoundQuads = {false, false, false, false};
-            for(int j = 0; i < QPTS; j++){
+            for(int j = 0; j < QPTS; j++){
                 if(POINTS[i][0] >= 0 && POINTS[i][1] >= 0){
                     FoundQuads[0] = true;
                 }
@@ -111,9 +111,15 @@ public class LaunchInterceptorConditions {
                 }
             }
             else{
+                double x1 = POINTS[i][0];
+                double x2 = POINTS[i + NPTS][0];
+                double y1 = POINTS[i][1];
+                double y2 = POINTS[i + NPTS][1];
+                double a = y2 - y1;
+                double b = x1 - x2;
+                double c = x2 * y1 - x1 * y2;
                 for(int j = i + 1; j < i + NPTS; j++){
-                    int[] MidwayPoint = {(POINTS[i][0]-POINTS[i + NPTS][0])/2, (POINTS[i][1]-POINTS[i + NPTS][1])/2};
-                    if(HelperFunction.calculateDistance(MidwayPoint, POINTS[j]) > DIST){
+                    if(Maths.abs((a * POINTS[j][0] + b * POINTS[j][1] + c)/Math.sqrt(a * a + b * b)) > DIST){
                         return true;
                     }
                     
