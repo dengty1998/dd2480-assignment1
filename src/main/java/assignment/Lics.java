@@ -1,201 +1,175 @@
 package assignment;
 
-public class LaunchInterceptorConditions {
 
-    public static boolean ConditionZero(double LENGTH1, int[][] POINTS) {
-        if (LENGTH1 <= 0) {
-            return false;
-        }
-        for (int i = 0; i < POINTS.length - 1; i++) {
-            if (HelperFunction.calculateDistance(POINTS[i], POINTS[i + 1]) > LENGTH1) {
+interface Lic {
+    boolean check(Parameters params, double[][] points);
+}
+
+
+public class Lics {
+    public static final Lic[] lics = {(params, points) -> { /* LIC 0 */
+        for (int i = 0; i < points.length - 1; i++) {
+            if (HelperFunction.calculateDistance(points[i], points[i + 1]) > params.LENGTH1) {
                 return true;
             }
         }
         return false;
-    }
-
-    public static boolean ConditionOne(double RADIUS1, int[][] POINTS) {
-        if (RADIUS1 <= 0) {
-            return false;
-        }
-        for (int i = 0; i < POINTS.length - 2; i++) {
-            if (!HelperFunction.checkTriangelFitCircle(POINTS[i],
-                                                       POINTS[i + 1],
-                                                       POINTS[i + 2],
-                                                       RADIUS1)) {
+    }, (params, points) -> { /* LIC 1 */
+        for (int i = 0; i < points.length - 2; i++) {
+            if (!HelperFunction.checkTriangelFitCircle(points[i],
+                                                       points[i + 1],
+                                                       points[i + 2],
+                                                       params.RADIUS1)) {
                 return true;
             }
         }
         return false;
-    }
-
-    public static boolean ConditionTwo(double EPSILON, int[][] POINTS) {
-        if (EPSILON <= 0 || EPSILON >= Math.PI) {
-            return false;
-        }
-        for (int i = 0; i < POINTS.length - 2; i++) {
-            if (HelperFunction.checkAngle(POINTS[i], POINTS[i + 1], POINTS[i + 2], EPSILON)) {
+    }, (params, points) -> { /* LIC 2 */
+        for (int i = 0; i < points.length - 2; i++) {
+            if (HelperFunction.checkAngle(points[i],
+                                          points[i + 1],
+                                          points[i + 2],
+                                          params.EPSILON)) {
                 return true;
             }
         }
         return false;
-    }
-
-    public static boolean ConditionThree(double AREA1, int[][] POINTS) {
-        if (AREA1 <= 0) {
-            return false;
-        }
-        for (int i = 0; i < POINTS.length - 2; i++) {
-            if (HelperFunction.checkArea(POINTS[i], POINTS[i + 1], POINTS[i + 2], AREA1)) {
+    }, (params, points) -> { /* LIC 3 */
+        for (int i = 0; i < points.length - 2; i++) {
+            if (HelperFunction.checkArea(points[i], points[i + 1], points[i + 2], params.AREA1)) {
                 return true;
             }
         }
         return false;
-    }
-
-    public static boolean ConditionFour(int QPTS, int QUADS, int[][] POINTS) {
-        // do something
-        return true;
-    }
-
-    public static boolean ConditionFive(int[][] POINTS) {
-        // do something
-        return true;
-    }
-
-    public static boolean ConditionSix(int NPTS, double DIST, int NUMPOINTS, int[][] POINTS) {
-        // do something
-        return true;
-    }
-
-    public static boolean ConditionSeven(double LENGTH1, int KPTS, int NUMPOINTS, int[][] POINTS) {
-        // do something
-        return true;
-    }
-
-    public static boolean ConditionEight(int APTS,
-                                         int BPTS,
-                                         double RADIUS1,
-                                         int NUMPOINTS,
-                                         int[][] POINTS) {
-        if (NUMPOINTS < 5 || APTS < 1 || BPTS < 1 || APTS + BPTS > NUMPOINTS - 3) {
+    }, (params, points) -> { /* LIC 4 */
+        return false;
+    }, (params, points) -> { /* LIC 5 */
+        return false;
+    }, (params, points) -> { /* LIC 6 */
+        return false;
+    }, (params, points) -> { /* LIC 7 */
+        return false;
+    }, (params, points) -> { /* LIC 8 */
+        if (points.length < 5) {
             return false;
         }
-        for (int i = 0; i < NUMPOINTS - APTS - BPTS - 2; i++) {
-            int[] point1 = POINTS[i];
-            int[] point2 = POINTS[i + APTS + 1];
-            int[] point3 = POINTS[i + APTS + BPTS + 2];
-            if (!HelperFunction.checkTriangelFitCircle(point1, point2, point3, RADIUS1)) {
+        for (int i = 0; i < points.length - params.A_PTS - params.B_PTS - 2; i++) {
+            double[] point1 = points[i];
+            double[] point2 = points[i + params.A_PTS + 1];
+            double[] point3 = points[i + params.A_PTS + params.B_PTS + 2];
+            if (!HelperFunction.checkTriangelFitCircle(point1, point2, point3, params.RADIUS1)) {
                 return true;
             }
         }
         return false;
-    }
-
-    public static boolean ConditionNine(int CPTS,
-                                        int DPTS,
-                                        double EPSILON,
-                                        int NUMPOINTS,
-                                        int[][] POINTS) {
-        if (NUMPOINTS < 5 || CPTS < 1 || DPTS < 1 || CPTS + DPTS > NUMPOINTS - 3) {
+    }, (params, points) -> { /* LIC 9 */
+        if (points.length < 5) {
             return false;
         }
-        for (int i = 0; i < NUMPOINTS - CPTS - DPTS - 2; i++) {
-            int[] point1 = POINTS[i];
-            int[] point2 = POINTS[i + CPTS + 1];
-            int[] point3 = POINTS[i + CPTS + DPTS + 2];
-            if (HelperFunction.checkAngle(point1, point2, point3, EPSILON)) {
+        for (int i = 0; i < points.length - params.C_PTS - params.D_PTS - 2; i++) {
+            double[] point1 = points[i];
+            double[] point2 = points[i + params.C_PTS + 1];
+            double[] point3 = points[i + params.C_PTS + params.D_PTS + 2];
+            if (HelperFunction.checkAngle(point1, point2, point3, params.EPSILON)) {
                 return true;
             }
         }
         return false;
-    }
-
-    public static boolean ConditionTen(int EPTS,
-                                       int FPTS,
-                                       double AREA1,
-                                       int NUMPOINTS,
-                                       int[][] POINTS) {
-        if (NUMPOINTS < 5 || EPTS < 1 || FPTS < 1 || EPTS + FPTS > NUMPOINTS - 3) {
+    }, (params, points) -> { /* LIC 10 */
+        if (points.length < 5) {
             return false;
         }
-        for (int i = 0; i < NUMPOINTS - EPTS - FPTS - 2; i++) {
-            int[] point1 = POINTS[i];
-            int[] point2 = POINTS[i + EPTS + 1];
-            int[] point3 = POINTS[i + EPTS + FPTS + 2];
-            if (HelperFunction.checkArea(point1, point2, point3, AREA1)) {
+        for (int i = 0; i < points.length - params.E_PTS - params.F_PTS - 2; i++) {
+            double[] point1 = points[i];
+            double[] point2 = points[i + params.E_PTS + 1];
+            double[] point3 = points[i + params.E_PTS + params.F_PTS + 2];
+            if (HelperFunction.checkArea(point1, point2, point3, params.AREA1)) {
                 return true;
             }
         }
         return false;
-    }
-
-    public static boolean ConditionEleven(int GPTS, int NUMPOINTS, int[][] POINTS) {
-        if (NUMPOINTS < 3 || GPTS < 1 || GPTS > NUMPOINTS - 2) {
+    }, (params, points) -> { /* LIC 11 */
+        if (points.length < 3) {
             return false;
         }
-        for (int i = 0; i < NUMPOINTS - GPTS - 1; i++) {
-            int[] point1 = POINTS[i];
-            int[] point2 = POINTS[i + GPTS + 1];
+        for (int i = 0; i < points.length - params.G_PTS - 1; i++) {
+            double[] point1 = points[i];
+            double[] point2 = points[i + params.G_PTS + 1];
             if ((point2[0] - point1[0]) < 0) {
                 return true;
             }
         }
         return false;
-    }
-
-    public static boolean ConditionTwelve(int K_PTS,
-                                          double LENGTH1,
-                                          double LENGTH2,
-                                          int[][] POINTS) {
-        if (!ConditionSeven(LENGTH1, K_PTS, POINTS.length, POINTS)) {
+    }, (params, points) -> { /* LIC 12 */
+        boolean ok = false;
+        for (int i = 0; i < points.length - params.K_PTS - 1; ++i) {
+            if (HelperFunction.calculateDistance(points[i],
+                                                 points[i + params.K_PTS]) > params.LENGTH1) {
+                ok = true;
+                break;
+            }
+        }
+        if (!ok) {
             return false;
         }
-        for (int i = 0; i < POINTS.length - K_PTS - 1; ++i) {
-            if (HelperFunction.calculateDistance(POINTS[i], POINTS[i + K_PTS]) < LENGTH2) {
+        for (int i = 0; i < points.length - params.K_PTS - 1; ++i) {
+            if (HelperFunction.calculateDistance(points[i],
+                                                 points[i + params.K_PTS]) < params.LENGTH2) {
                 return true;
             }
         }
         return false;
-    }
-
-    public static boolean ConditionThirteen(int APTS,
-                                            int BPTS,
-                                            double RADIUS1,
-                                            double RADIUS2,
-                                            int NUMPOINTS,
-                                            int[][] POINTS) {
-        if (!ConditionEight(APTS, BPTS, RADIUS1, NUMPOINTS, POINTS)) {
+    }, (params, points) -> { /* LIC 13 */
+        if (points.length < 5) {
             return false;
         }
-        for (int i = 0; i < NUMPOINTS - APTS - BPTS - 2; i++) {
-            int[] point1 = POINTS[i];
-            int[] point2 = POINTS[i + APTS + 1];
-            int[] point3 = POINTS[i + APTS + BPTS + 2];
-            if (HelperFunction.checkTriangelFitCircle(point1, point2, point3, RADIUS2)) {
+        boolean ok = false;
+        for (int i = 0; i < points.length - params.A_PTS - params.B_PTS - 2; i++) {
+            double[] point1 = points[i];
+            double[] point2 = points[i + params.A_PTS + 1];
+            double[] point3 = points[i + params.A_PTS + params.B_PTS + 2];
+            if (!HelperFunction.checkTriangelFitCircle(point1, point2, point3, params.RADIUS1)) {
+                ok = true;
+                break;
+            }
+        }
+        if (!ok) {
+            return false;
+        }
+        for (int i = 0; i < points.length - params.A_PTS - params.B_PTS - 2; i++) {
+            double[] point1 = points[i];
+            double[] point2 = points[i + params.A_PTS + 1];
+            double[] point3 = points[i + params.A_PTS + params.B_PTS + 2];
+            if (HelperFunction.checkTriangelFitCircle(point1, point2, point3, params.RADIUS2)) {
                 return true;
             }
         }
         return false;
-    }
-
-    public static boolean ConditionFourteen(int EPTS,
-                                            int FPTS,
-                                            double AREA1,
-                                            double AREA2,
-                                            int NUMPOINTS,
-                                            int[][] POINTS) {
-        if (!ConditionTen(EPTS, FPTS, AREA1, NUMPOINTS, POINTS)) {
+    }, (params, points) -> { /* LIC 14 */
+        if (points.length < 5) {
             return false;
         }
-        for (int i = 0; i < NUMPOINTS - EPTS - FPTS - 2; i++) {
-            int[] point1 = POINTS[i];
-            int[] point2 = POINTS[i + EPTS + 1];
-            int[] point3 = POINTS[i + EPTS + FPTS + 2];
-            if (!HelperFunction.checkArea(point1, point2, point3, AREA2)) {
+        boolean ok = false;
+        for (int i = 0; i < points.length - params.E_PTS - params.F_PTS - 2; i++) {
+            double[] point1 = points[i];
+            double[] point2 = points[i + params.E_PTS + 1];
+            double[] point3 = points[i + params.E_PTS + params.F_PTS + 2];
+            if (HelperFunction.checkArea(point1, point2, point3, params.AREA1)) {
+                ok = true;
+                break;
+            }
+        }
+        if (!ok) {
+            return false;
+        }
+        for (int i = 0; i < points.length - params.E_PTS - params.F_PTS - 2; i++) {
+            double[] point1 = points[i];
+            double[] point2 = points[i + params.E_PTS + 1];
+            double[] point3 = points[i + params.E_PTS + params.F_PTS + 2];
+            if (!HelperFunction.checkArea(point1, point2, point3, params.AREA2)) {
                 return true;
             }
         }
         return false;
-    }
+    }};
 }

@@ -3,48 +3,49 @@ package assignment;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class LaunchInterceptorConditionsTest {
+public class LicsTest {
     @Test
-    public void testConditionZero() {
-        int[][] points = {{0, 0}, {0, 1}, {1, 1}, {1, 0}};
+    public void testLic0() {
+        double[][] points = {{0.01, 0.01}, {0, 0}, {0, 1}, {1, 1}, {1, 0}};
+        ParametersBuilder builder = new ParametersBuilder();
         // length 1 is greater than the length of the given points so it should return false
-        Assert.assertFalse(LaunchInterceptorConditions.ConditionZero(1.0, points));
+        builder.length1 = 1.0;
+        Assert.assertFalse(Lics.lics[0].check(builder.build(points.length), points));
         // length 0.5 is less than the length of the given points so it should return true
-        Assert.assertTrue(LaunchInterceptorConditions.ConditionZero(0.5, points));
-        // length 0 lower bound gives false
-        Assert.assertFalse(LaunchInterceptorConditions.ConditionZero(0, points));
+        builder.length1 = 0.5;
+        Assert.assertTrue(Lics.lics[0].check(builder.build(points.length), points));
     }
 
     @Test
-    public void testConditionOne() {
-        int[][] points = {{0, 0}, {0, 1}, {1, 1}, {1, 0}};
-        // radius 1 cannot fit the given points so it should return false
-        Assert.assertFalse(LaunchInterceptorConditions.ConditionOne(1.0, points));
-        // radius 0.5 can fit the given points so it should return true
-        Assert.assertTrue(LaunchInterceptorConditions.ConditionOne(0.5, points));
-        // radius 0 lower bound gives false
-        Assert.assertFalse(LaunchInterceptorConditions.ConditionOne(0, points));
+    public void testLic1() {
+        double[][] points = {{0.01, 0.01}, {0, 0}, {0, 1}, {1, 1}, {1, 0}};
+        ParametersBuilder builder = new ParametersBuilder();
+        // radius 1 can fit the given points so it should return false
+        builder.radius1 = 1.0;
+        Assert.assertFalse(Lics.lics[1].check(builder.build(points.length), points));
+        // radius 0.5 cannot fit the given points so it should return true
+        builder.radius1 = 0.1;
+        Assert.assertTrue(Lics.lics[1].check(builder.build(points.length), points));
     }
 
     @Test
-    public void testConditionTwo() {
-        int[][] points = {{0, 0}, {0, 1}, {1, 1}, {1, 0}};
+    public void testLic2() {
+        double[][] points = {{0.01, 0.01}, {0, 0}, {0, 1}, {1, 1}, {1, 0}};
+        ParametersBuilder builder = new ParametersBuilder();
         // epsilon 1 gives true with the given points
-        Assert.assertTrue(LaunchInterceptorConditions.ConditionTwo(1.0, points));
-        // epsilon upper bound gives false
-        Assert.assertFalse(LaunchInterceptorConditions.ConditionTwo(10, points));
-        // epsilon lower bound gives false
-        Assert.assertFalse(LaunchInterceptorConditions.ConditionTwo(0, points));
+        builder.epsilon = 1.0;
+        Assert.assertTrue(Lics.lics[2].check(builder.build(points.length), points));
     }
 
     @Test
-    public void testConditionThree() {
-        int[][] points = {{0, 0}, {0, 4}, {4, 4}, {4, 0}};
+    public void testLic3() {
+        double[][] points = {{0.01, 0.01}, {0, 0}, {0, 4}, {4, 4}, {4, 0}};
+        ParametersBuilder builder = new ParametersBuilder();
         // area 1 is less than the area of the given points so it should return true
-        Assert.assertTrue(LaunchInterceptorConditions.ConditionThree(1.0, points));
+        builder.area1 = 1.0;
+        Assert.assertTrue(Lics.lics[3].check(builder.build(points.length), points));
         // area 10 is greater than the area of the given points so it should return false
-        Assert.assertFalse(LaunchInterceptorConditions.ConditionThree(10, points));
-        // area 1 lower bound gives false
-        Assert.assertFalse(LaunchInterceptorConditions.ConditionThree(0, points));
+        builder.area1 = 10.0;
+        Assert.assertFalse(Lics.lics[3].check(builder.build(points.length), points));
     }
 }
