@@ -174,7 +174,7 @@ public class Lics {
         boolean ok = false;
         for (int i = 0; i < points.length - params.K_PTS - 1; ++i) {
             if (HelperFunction.calculateDistance(points[i],
-                                                 points[i + params.K_PTS]) > params.LENGTH1) {
+                                                 points[i + params.K_PTS + 1]) > params.LENGTH1) {
                 ok = true;
                 break;
             }
@@ -184,7 +184,7 @@ public class Lics {
         }
         for (int i = 0; i < points.length - params.K_PTS - 1; ++i) {
             if (HelperFunction.calculateDistance(points[i],
-                                                 points[i + params.K_PTS]) < params.LENGTH2) {
+                                                 points[i + params.K_PTS + 1]) < params.LENGTH2) {
                 return true;
             }
         }
