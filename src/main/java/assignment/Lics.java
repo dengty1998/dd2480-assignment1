@@ -42,12 +42,82 @@ public class Lics {
         }
         return false;
     }, (params, points) -> { /* LIC 4 */
+        for (int i = 0; i < points.length - params.Q_PTS + 1; i++) {
+            boolean[] FoundQuads = {false, false, false, false};
+            for (int j = i; j < params.Q_PTS + i; j++) {
+                if (points[j][0] >= 0 && points[j][1] >= 0) {
+                    FoundQuads[0] = true;
+                }
+                if (points[j][0] < 0 && points[j][1] >= 0) {
+                    FoundQuads[1] = true;
+                }
+                if (points[j][0] <= 0 && points[j][1] < 0) {
+                    FoundQuads[2] = true;
+                }
+                if (points[j][0] > 0 && points[j][1] < 0) {
+                    FoundQuads[3] = true;
+                }
+            }
+
+            int QuadsWithPoints = 0;
+            for (int l = 0; l < FoundQuads.length; l++) {
+                if (FoundQuads[i]) {
+                    QuadsWithPoints++;
+                }
+            }
+            if (QuadsWithPoints > params.QUADS) {
+                return true;
+            }
+        }
+
         return false;
     }, (params, points) -> { /* LIC 5 */
+        for (int i = 1; i < points.length; i++) {
+            if (points[i][0] - points[i - 1][0] < 0) {
+                return true;
+            }
+        }
         return false;
     }, (params, points) -> { /* LIC 6 */
+        for (int i = 0; i < points.length - params.N_PTS; i++) {
+            // First loop changes the data set moving it from start of NUMPOINTS to end.
+            if (points[i][0] == points[i + params.N_PTS][0]
+                            && points[i][1] == points[i + params.N_PTS][1]) {
+                // checking to see if start and end points are the same
+
+                for (int j = i + 1; j < i + params.N_PTS - 1; j++) { // i is the start point so
+                                                                     // start on +1
+                    // -1 so that we don't waste time on end point
+                    // Second loop iterates through every point checking distance compared to DIST.
+                    if (HelperFunction.calculateDistance(points[i], points[j]) > params.DIST) {
+                        return true;
+                    }
+                }
+            } else {
+                double x1 = points[i][0];
+                double x2 = points[i + params.N_PTS][0];
+                double y1 = points[i][1];
+                double y2 = points[i + params.N_PTS][1];
+                double a = y2 - y1;
+                double b = x1 - x2;
+                double c = x2 * y1 - x1 * y2;
+                for (int j = i + 1; j < i + params.N_PTS; j++) {
+                    if (Math.abs((a * points[j][0] + b * points[j][1] + c)
+                                    / Math.sqrt(a * a + b * b)) > params.DIST) {
+                        return true;
+                    }
+
+                }
+            }
+        }
         return false;
     }, (params, points) -> { /* LIC 7 */
+        for (int i = 0; i < points.length - params.K_PTS - 1; i++) {
+            if (HelperFunction.calculateDistance(points[i],
+                                                 points[i + params.K_PTS + 1]) > params.LENGTH1) {
+                return true;
+            }
+        }
         return false;
     }, (params, points) -> { /* LIC 8 */
         if (points.length < 5) {
