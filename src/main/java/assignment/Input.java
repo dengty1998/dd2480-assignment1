@@ -2,10 +2,10 @@ package assignment;
 
 // Input for the decide function
 public class Input {
-    public final double[][] points;
-    public final Parameters params;
-    public final Connect[][] lcm;
-    public final boolean[] puv;
+    public final double[][] POINTS;
+    public final Parameters PARAMS;
+    public final Connect[][] LCM;
+    public final boolean[] PUV;
 
     public static enum Connect {
         ANDD, ORR, NOTUSED;
@@ -40,9 +40,9 @@ public class Input {
         if (!(puv.length == 15)) {
             throw new IllegalArgumentException("PUV should be vector of 15 items.");
         }
-        this.points = points;
-        this.params = params;
-        this.lcm = lcm;
-        this.puv = puv;
+        POINTS = points;
+        PARAMS = params;
+        LCM = lcm;
+        PUV = puv;
     }
 }
