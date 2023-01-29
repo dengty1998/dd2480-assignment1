@@ -59,11 +59,11 @@ public class Parameters {
         if (!(1 <= quads && quads <= 3)) {
             throw new IllegalArgumentException("QUADS should be >= 1 and <= 3.");
         }
-        if (!(3 <= n_pts && n_pts <= numpoints)) {
-            throw new IllegalArgumentException("N_PTS should be >= 3 and <= NUMPOINTS.");
-        }
         if (!(0 <= dist)) {
             throw new IllegalArgumentException("DIST should be >= 0.");
+        }
+        if (!(3 <= n_pts && n_pts <= numpoints)) {
+            throw new IllegalArgumentException("N_PTS should be >= 3 and <= NUMPOINTS.");
         }
         if (!(1 <= k_pts && k_pts <= numpoints - 2)) {
             throw new IllegalArgumentException("K_PTS should be >= 1 and <= NUMPOINTS-2.");
