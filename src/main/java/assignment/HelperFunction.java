@@ -55,7 +55,6 @@ public class HelperFunction {
         double area =
             Math.abs((point1[0] * (point2[1] - point3[1]) + point2[0] * (point3[1] - point1[1])
                             + point3[0] * (point1[1] - point2[1])) / 2.0);
-        System.out.println(area);
         return area > AREA1;
     }
 }
