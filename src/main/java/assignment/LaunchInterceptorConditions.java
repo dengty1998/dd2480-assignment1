@@ -14,8 +14,10 @@ public class LaunchInterceptorConditions {
     public static boolean ConditionOne(double RADIUS1, int[][] POINTS) {
 
         for (int i = 0; i < POINTS.length - 2; i++) {
-            if (!HelperFunction.checkTriangelFitCircle(POINTS[i], POINTS[i + 1], POINTS[i + 2],
-                            RADIUS1)) {
+            if (!HelperFunction.checkTriangelFitCircle(POINTS[i],
+                                                       POINTS[i + 1],
+                                                       POINTS[i + 2],
+                                                       RADIUS1)) {
                 return true;
             }
         }
@@ -60,8 +62,11 @@ public class LaunchInterceptorConditions {
         return true;
     }
 
-    public static boolean ConditionEight(int APTS, int BPTS, double RADIUS1, int NUMPOINTS,
-                    int[][] POINTS) {
+    public static boolean ConditionEight(int APTS,
+                                         int BPTS,
+                                         double RADIUS1,
+                                         int NUMPOINTS,
+                                         int[][] POINTS) {
         if (NUMPOINTS < 5 || APTS < 1 || BPTS < 1 || APTS + BPTS > NUMPOINTS - 3) {
             return false;
         }
@@ -76,8 +81,11 @@ public class LaunchInterceptorConditions {
         return false;
     }
 
-    public static boolean ConditionNine(int CPTS, int DPTS, double EPSILON, int NUMPOINTS,
-                    int[][] POINTS) {
+    public static boolean ConditionNine(int CPTS,
+                                        int DPTS,
+                                        double EPSILON,
+                                        int NUMPOINTS,
+                                        int[][] POINTS) {
         if (NUMPOINTS < 5 || CPTS < 1 || DPTS < 1 || CPTS + DPTS > NUMPOINTS - 3) {
             return false;
         }
@@ -92,8 +100,11 @@ public class LaunchInterceptorConditions {
         return false;
     }
 
-    public static boolean ConditionTen(int EPTS, int FPTS, double AREA1, int NUMPOINTS,
-                    int[][] POINTS) {
+    public static boolean ConditionTen(int EPTS,
+                                       int FPTS,
+                                       double AREA1,
+                                       int NUMPOINTS,
+                                       int[][] POINTS) {
         if (NUMPOINTS < 5 || EPTS < 1 || FPTS < 1 || EPTS + FPTS > NUMPOINTS - 3) {
             return false;
         }
@@ -122,8 +133,10 @@ public class LaunchInterceptorConditions {
         return false;
     }
 
-    public static boolean ConditionTwelve(int K_PTS, double LENGTH1, double LENGTH2,
-                    int[][] POINTS) {
+    public static boolean ConditionTwelve(int K_PTS,
+                                          double LENGTH1,
+                                          double LENGTH2,
+                                          int[][] POINTS) {
         if (!ConditionSeven(LENGTH1, K_PTS, POINTS.length, POINTS)) {
             return false;
         }
@@ -135,8 +148,12 @@ public class LaunchInterceptorConditions {
         return false;
     }
 
-    public static boolean ConditionThirteen(int APTS, int BPTS, double RADIUS1, double RADIUS2,
-                    int NUMPOINTS, int[][] POINTS) {
+    public static boolean ConditionThirteen(int APTS,
+                                            int BPTS,
+                                            double RADIUS1,
+                                            double RADIUS2,
+                                            int NUMPOINTS,
+                                            int[][] POINTS) {
         if (!ConditionEight(APTS, BPTS, RADIUS1, NUMPOINTS, POINTS)) {
             return false;
         }
@@ -151,8 +168,12 @@ public class LaunchInterceptorConditions {
         return false;
     }
 
-    public static boolean ConditionFourteen(int EPTS, int FPTS, double AREA1, double AREA2,
-                    int NUMPOINTS, int[][] POINTS) {
+    public static boolean ConditionFourteen(int EPTS,
+                                            int FPTS,
+                                            double AREA1,
+                                            double AREA2,
+                                            int NUMPOINTS,
+                                            int[][] POINTS) {
         if (!ConditionTen(EPTS, FPTS, AREA1, NUMPOINTS, POINTS)) {
             return false;
         }

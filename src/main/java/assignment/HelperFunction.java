@@ -9,8 +9,10 @@ public class HelperFunction {
         return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
     }
 
-    public static boolean checkTriangelFitCircle(int[] point1, int[] point2, int[] point3,
-                    double radius) {
+    public static boolean checkTriangelFitCircle(int[] point1,
+                                                 int[] point2,
+                                                 int[] point3,
+                                                 double radius) {
         double a = point1[0] - point3[0];
         double b = point2[0] - point3[0];
         double c = point1[1] - point3[1];
@@ -50,9 +52,9 @@ public class HelperFunction {
     }
 
     public static boolean checkArea(int[] point1, int[] point2, int[] point3, double AREA1) {
-        double area = Math.abs(
-                        (point1[0] * (point2[1] - point3[1]) + point2[0] * (point3[1] - point1[1])
-                                        + point3[0] * (point1[1] - point2[1])) / 2.0);
+        double area =
+            Math.abs((point1[0] * (point2[1] - point3[1]) + point2[0] * (point3[1] - point1[1])
+                            + point3[0] * (point1[1] - point2[1])) / 2.0);
         System.out.println(area);
         return area > AREA1;
     }

@@ -12,8 +12,11 @@ public class Input {
         ANDD, ORR, NOTUSED;
     }
 
-    public Input(int NUMPOINTS, int[][] POINTS, Parameters PARAMETERS, Connect[][] LCM,
-                    boolean[] PUV) {
+    public Input(int NUMPOINTS,
+                 int[][] POINTS,
+                 Parameters PARAMETERS,
+                 Connect[][] LCM,
+                 boolean[] PUV) {
         this.NUMPOINTS = NUMPOINTS;
         this.POINTS = POINTS;
         this.PARAMETERS = PARAMETERS;

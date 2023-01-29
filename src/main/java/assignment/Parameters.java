@@ -21,10 +21,25 @@ public class Parameters {
     public final double RADIUS2;
     public final double AREA2;
 
-    public Parameters(double LENGTH1, double RADIUS1, double EPSILON, double AREA1, int QPTS,
-                    int QUADS, double DIST, int NPTS, int KPTS, int APTS, int BPTS, int CPTS,
-                    int DPTS, int EPTS, int FPTS, int GPTS, double LENGTH2, double RADIUS2,
-                    double AREA2) {
+    public Parameters(double LENGTH1,
+                      double RADIUS1,
+                      double EPSILON,
+                      double AREA1,
+                      int QPTS,
+                      int QUADS,
+                      double DIST,
+                      int NPTS,
+                      int KPTS,
+                      int APTS,
+                      int BPTS,
+                      int CPTS,
+                      int DPTS,
+                      int EPTS,
+                      int FPTS,
+                      int GPTS,
+                      double LENGTH2,
+                      double RADIUS2,
+                      double AREA2) {
         this.LENGTH1 = LENGTH1;
         this.RADIUS1 = RADIUS1;
         this.EPSILON = EPSILON;
