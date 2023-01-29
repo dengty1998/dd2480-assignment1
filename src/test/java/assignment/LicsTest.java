@@ -122,4 +122,68 @@ public class LicsTest {
         points = new double[][] {{0, 0}, {0, 0}, {1, 0}, {0, 0}, {2, 0}};
         assertFalse();
     }
+
+    @Test
+    public void testLic12() {
+        lic = Lics.lics[12];
+        builder = new ParametersBuilder();
+        builder.k_pts = 1;
+        points = new double[][] {{0, 0}, {0, 1}, {0, 2}, {0, 3}, {0, 4}};
+        // The distance between points separated by one point is 2
+        builder.length1 = 1;
+        builder.length2 = 3;
+        assertTrue();
+        // LENGTH1 is too big
+        builder.length1 = 3;
+        builder.length2 = 3;
+        assertFalse();
+        // LENGTH2 is too small
+        builder.length1 = 1;
+        builder.length2 = 1;
+        assertFalse();
+    }
+
+    @Test
+    public void testLic13() {
+        lic = Lics.lics[13];
+        builder = new ParametersBuilder();
+        builder.k_pts = 1;
+        points =
+            new double[][] {{1, 0}, {0, 10}, {0, 1}, {10, 10}, {1, 0}, {1, 1}, {10, 0}, {1, 1}};
+        builder.a_pts = 1;
+        builder.b_pts = 2;
+        builder.radius1 = 0.1;
+        builder.radius2 = 10.0;
+        assertTrue();
+        // RADIUS1 is too big
+        builder.radius1 = 10.0;
+        builder.radius2 = 10.0;
+        assertFalse();
+        // RADIUS2 is too small
+        builder.radius1 = 0.1;
+        builder.radius2 = 0.1;
+        assertFalse();
+    }
+
+    @Test
+    public void testLic14() {
+        lic = Lics.lics[14];
+        builder = new ParametersBuilder();
+        builder.k_pts = 1;
+        points =
+            new double[][] {{1, 0}, {0, 10}, {1, 1}, {10, 0}, {1, 0}, {0, 1}, {10, 10}, {0, 0}};
+        builder.e_pts = 1;
+        builder.f_pts = 2;
+        builder.area1 = 0.01;
+        builder.area2 = 100.0;
+        assertTrue();
+        // AREA1 is too big
+        builder.area1 = 100.0;
+        builder.area2 = 100.0;
+        assertFalse();
+        // AREA2 is too small
+        builder.area1 = 0.01;
+        builder.area2 = 0.01;
+        assertFalse();
+    }
 }
