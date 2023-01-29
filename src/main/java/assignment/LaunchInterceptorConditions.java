@@ -1,5 +1,6 @@
 package assignment;
 
+
 public class LaunchInterceptorConditions {
 
     public static boolean ConditionZero(double LENGTH1, int[][] POINTS) {
@@ -41,49 +42,49 @@ public class LaunchInterceptorConditions {
     }
 
     public static boolean ConditionFour(int QPTS, int QUADS, int[][] POINTS) {
-        if(QPTS < 2 || QPTS > POINTS.length){
-            return false;
-        }
-    
-        if(QUADS < 1 || QUADS > 3){
+        if (QPTS < 2 || QPTS > POINTS.length) {
             return false;
         }
 
-        for(int i = 0; i < POINTS.length - QPTS -1; i++){
+        if (QUADS < 1 || QUADS > 3) {
+            return false;
+        }
+
+        for (int i = 0; i < POINTS.length - QPTS + 1; i++) {
             boolean[] FoundQuads = {false, false, false, false};
-            for(int j = 0; j < QPTS; j++){
-                if(POINTS[i][0] >= 0 && POINTS[i][1] >= 0){
+            for (int j = i; j < QPTS + i; j++) {
+                if (POINTS[j][0] >= 0 && POINTS[j][1] >= 0) {
                     FoundQuads[0] = true;
                 }
-                if(POINTS[i][0] < 0 && POINTS[i][1] >= 0){
+                if (POINTS[j][0] < 0 && POINTS[j][1] >= 0) {
                     FoundQuads[1] = true;
                 }
-                if(POINTS[i][0] <= 0 && POINTS[i][1] < 0){
+                if (POINTS[j][0] <= 0 && POINTS[j][1] < 0) {
                     FoundQuads[2] = true;
                 }
-                if(POINTS[i][0] > 0 && POINTS[i][1] < 0){
+                if (POINTS[j][0] > 0 && POINTS[j][1] < 0) {
                     FoundQuads[3] = true;
                 }
             }
 
             int QuadsWithPoints = 0;
-            for(int l = 0; l < FoundQuads.length; l++){
-                if(FoundQuads[i]){
+            for (int l = 0; l < FoundQuads.length; l++) {
+                if (FoundQuads[i]) {
                     QuadsWithPoints++;
                 }
             }
-            if(QuadsWithPoints > QUADS){
+            if (QuadsWithPoints > QUADS) {
                 return true;
             }
         }
 
         return false;
     }
-    
+
 
     public static boolean ConditionFive(int[][] POINTS) {
-        for(int i = 1; i < POINTS.length; i++){
-            if(POINTS[i][0] - POINTS[i-1][0] < 0){
+        for (int i = 1; i < POINTS.length; i++) {
+            if (POINTS[i][0] - POINTS[i - 1][0] < 0) {
                 return true;
             }
         }
@@ -91,26 +92,25 @@ public class LaunchInterceptorConditions {
     }
 
     public static boolean ConditionSix(int NPTS, double DIST, int NUMPOINTS, int[][] POINTS) {
-        if(3 > NPTS || NPTS > NUMPOINTS){
+        if (3 > NPTS || NPTS > NUMPOINTS) {
             return false;
         }
-        if(0 > DIST){
+        if (0 > DIST) {
             return false;
         }
-        for(int i = 0; i < POINTS.length - NPTS; i++){
+        for (int i = 0; i < POINTS.length - NPTS; i++) {
             // First loop changes the data set moving it from start of NUMPOINTS to end.
-            if(POINTS[i][0] == POINTS[i + NPTS][0] && POINTS[i][1] == POINTS[i + NPTS][1]){
+            if (POINTS[i][0] == POINTS[i + NPTS][0] && POINTS[i][1] == POINTS[i + NPTS][1]) {
                 // checking to see if start and end points are the same
-                
-                for(int j = i + 1;j < i + NPTS - 1; j++  ){ // i is the start point so start on +1 
-                    //-1 so that we don't waste time on end point
-            // Second loop iterates through every point checking distance compared to DIST.
-                    if(HelperFunction.calculateDistance(POINTS[i], POINTS[j]) > DIST){
+
+                for (int j = i + 1; j < i + NPTS - 1; j++) { // i is the start point so start on +1
+                    // -1 so that we don't waste time on end point
+                    // Second loop iterates through every point checking distance compared to DIST.
+                    if (HelperFunction.calculateDistance(POINTS[i], POINTS[j]) > DIST) {
                         return true;
                     }
                 }
-            }
-            else{
+            } else {
                 double x1 = POINTS[i][0];
                 double x2 = POINTS[i + NPTS][0];
                 double y1 = POINTS[i][1];
@@ -118,11 +118,12 @@ public class LaunchInterceptorConditions {
                 double a = y2 - y1;
                 double b = x1 - x2;
                 double c = x2 * y1 - x1 * y2;
-                for(int j = i + 1; j < i + NPTS; j++){
-                    if(Maths.abs((a * POINTS[j][0] + b * POINTS[j][1] + c)/Math.sqrt(a * a + b * b)) > DIST){
+                for (int j = i + 1; j < i + NPTS; j++) {
+                    if (Math.abs((a * POINTS[j][0] + b * POINTS[j][1] + c)
+                                    / Math.sqrt(a * a + b * b)) > DIST) {
                         return true;
                     }
-                    
+
                 }
             }
         }
@@ -132,14 +133,14 @@ public class LaunchInterceptorConditions {
     }
 
     public static boolean ConditionSeven(double LENGTH1, int KPTS, int NUMPOINTS, int[][] POINTS) {
-        if(1 > KPTS || KPTS > (NUMPOINTS - 2)){
+        if (1 > KPTS || KPTS > (NUMPOINTS - 2)) {
             return false;
         }
-        if(NUMPOINTS < 3){
+        if (NUMPOINTS < 3) {
             return false;
         }
-        for(int i = 0; i < NUMPOINTS - KPTS - 1; i++){
-            if(HelperFunction.calculateDistance(POINTS[i], POINTS[i + KPTS + 1]) > LENGTH1){
+        for (int i = 0; i < NUMPOINTS - KPTS - 1; i++) {
+            if (HelperFunction.calculateDistance(POINTS[i], POINTS[i + KPTS + 1]) > LENGTH1) {
                 return true;
             }
         }
