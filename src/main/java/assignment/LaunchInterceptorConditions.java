@@ -122,20 +122,48 @@ public class LaunchInterceptorConditions {
         return false;
     }
 
-    public static boolean ConditionTwelve(int KPTS, double LENGTH2, int NUMPOINTS, int[][] POINTS) {
-        // do something
-        return true;
+    public static boolean ConditionTwelve(int K_PTS, double LENGTH1, double LENGTH2,
+                    int[][] POINTS) {
+        if (!ConditionSeven(LENGTH1, K_PTS, POINTS.length, POINTS)) {
+            return false;
+        }
+        for (int i = 0; i < POINTS.length - K_PTS - 1; ++i) {
+            if (HelperFunction.calculateDistance(POINTS[i], POINTS[i + K_PTS]) < LENGTH2) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static boolean ConditionThirteen(int APTS, int BPTS, double RADIUS1, double RADIUS2,
                     int NUMPOINTS, int[][] POINTS) {
-        // do something
-        return true;
+        if (!ConditionEight(APTS, BPTS, RADIUS1, NUMPOINTS, POINTS)) {
+            return false;
+        }
+        for (int i = 0; i < NUMPOINTS - APTS - BPTS - 2; i++) {
+            int[] point1 = POINTS[i];
+            int[] point2 = POINTS[i + APTS + 1];
+            int[] point3 = POINTS[i + APTS + BPTS + 2];
+            if (HelperFunction.checkTriangelFitCircle(point1, point2, point3, RADIUS2)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static boolean ConditionFourteen(int EPTS, int FPTS, double AREA1, double AREA2,
                     int NUMPOINTS, int[][] POINTS) {
-        // do something
-        return true;
+        if (!ConditionTen(EPTS, FPTS, AREA1, NUMPOINTS, POINTS)) {
+            return false;
+        }
+        for (int i = 0; i < NUMPOINTS - EPTS - FPTS - 2; i++) {
+            int[] point1 = POINTS[i];
+            int[] point2 = POINTS[i + EPTS + 1];
+            int[] point3 = POINTS[i + EPTS + FPTS + 2];
+            if (!HelperFunction.checkArea(point1, point2, point3, AREA2)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
