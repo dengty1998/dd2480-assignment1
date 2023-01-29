@@ -9,11 +9,11 @@ public class LicsTest {
     private double[][] points;
 
     private void assertFalse() {
-        Assert.assertFalse(lic.check(builder.build(points.length), points));
+        Assert.assertFalse(lic.check(builder.build(points.length), Point.makePoints(points)));
     }
 
     private void assertTrue() {
-        Assert.assertTrue(lic.check(builder.build(points.length), points));
+        Assert.assertTrue(lic.check(builder.build(points.length), Point.makePoints(points)));
     }
 
     @Test

@@ -1,56 +1,88 @@
 package assignment;
 
-public class HelperFunction {
-    public static double calculateDistance(double[] point1, double[] point2) {
-        double x1 = point1[0];
-        double y1 = point1[1];
-        double x2 = point2[0];
-        double y2 = point2[1];
-        return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
+public class Point {
+    public final double x;
+    public final double y;
+
+    public Point(double[] point) {
+        x = point[0];
+        y = point[1];
     }
 
-    public static boolean checkTriangelFitCircle(double[] point1,
-                                                 double[] point2,
-                                                 double[] point3,
-                                                 double radius) {
-        double a = calculateDistance(point1, point2);
-        double b = calculateDistance(point2, point3);
-        double c = calculateDistance(point3, point1);
-        double r = a * b * c / Math.sqrt((a + b + c) * (a + b - c) * (a - b + c) * (-a + b + c));
-        return r <= radius;
+    public Point(double x, double y) {
+        this.x = x;
+        this.y = y;
     }
 
-    public static boolean checkAngle(double[] point1,
-                                     double[] point2,
-                                     double[] point3,
-                                     double EPSILON) {
-        // point1, point2 and point3 create a triangle, for each angle if angle is less than
-        // (pi-epsilon) or greater than (pi+epsilon) return true
-        double angle1 = Math.atan2(point2[1] - point1[1], point2[0] - point1[0])
-                        - Math.atan2(point3[1] - point1[1], point3[0] - point1[0]);
-        double angle2 = Math.atan2(point3[1] - point2[1], point3[0] - point2[0])
-                        - Math.atan2(point1[1] - point2[1], point1[0] - point2[0]);
-        double angle3 = Math.atan2(point1[1] - point3[1], point1[0] - point3[0])
-                        - Math.atan2(point2[1] - point3[1], point2[0] - point3[0]);
-        if (angle1 < Math.PI - EPSILON || angle1 > Math.PI + EPSILON) {
-            return true;
+    public static Point[] makePoints(double[][] data) {
+        Point[] points = new Point[data.length];
+        for (int i = 0; i != data.length; ++i) {
+            points[i] = new Point(data[i]);
         }
-        if (angle2 < Math.PI - EPSILON || angle2 > Math.PI + EPSILON) {
-            return true;
-        }
-        if (angle3 < Math.PI - EPSILON || angle3 > Math.PI + EPSILON) {
-            return true;
-        }
-        return false;
+        return points;
     }
 
-    public static boolean checkArea(double[] point1,
-                                    double[] point2,
-                                    double[] point3,
-                                    double AREA1) {
-        double area =
-            Math.abs((point1[0] * (point2[1] - point3[1]) + point2[0] * (point3[1] - point1[1])
-                            + point3[0] * (point1[1] - point2[1])) / 2.0);
-        return area > AREA1;
+    public double norm() {
+        return Math.sqrt(Math.pow(x, 2.0) + Math.pow(y, 2.0));
+    }
+
+    public Point add(Point b) {
+        return new Point(x + b.x, y + b.y);
+    }
+
+    public Point subtract(Point b) {
+        return new Point(x - b.x, y - b.y);
+    }
+
+    public double distanceTo(Point b) {
+        return subtract(b).norm();
+    }
+
+    public double circumcircleRadius(Point b, Point c) {
+        if (triangleArea(b, c) == 0) {
+            return Math.max(Math.max(distanceTo(b), distanceTo(c)), b.distanceTo(c)) / 2.0;
+        }
+        double ab = distanceTo(b);
+        double bc = b.distanceTo(c);
+        double ca = c.distanceTo(this);
+        return ab * bc * ca / triangleArea(b, c) / 4.0;
+    }
+
+    public double triangleArea(Point b, Point c) {
+        return Math.abs((x - c.x) * (b.y - y) - (x - b.x) * (c.y - y)) / 2.0;
+    }
+
+    public double dotProduct(Point b) {
+        return x * b.x + y * b.y;
+    }
+
+    // Finds angle BAC
+    public Double angle(Point b, Point c) {
+        if (distanceTo(b) == 0 || distanceTo(c) == 0) {
+            return null;
+        }
+        Point ab = subtract(b);
+        Point ac = subtract(c);
+        return Math.acos(ab.dotProduct(ac) / ab.norm() / ac.norm());
+    }
+
+    public int quadrant() {
+        if (x >= 0 && y >= 0) {
+            return 0;
+        } else if (x >= 0 && y < 0) {
+            return 1;
+        } else if (x < 0 && y >= 0) {
+            return 2;
+        } else {
+            return 3;
+        }
+    }
+
+    // Distance from A to line BC, if B=C, distance from A to this point
+    public double distanceToLine(Point b, Point c) {
+        if (b.distanceTo(c) == 0) {
+            return distanceTo(b);
+        }
+        return Math.abs((c.x - b.x) * (b.y - y) - (b.x - x) * (c.y - b.y)) / b.distanceTo(c);
     }
 }

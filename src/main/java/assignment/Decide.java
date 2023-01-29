@@ -13,7 +13,7 @@ public class Decide {
         return true;
     }
 
-    private static boolean[] calculateCmv(Parameters params, double[][] points) {
+    private static boolean[] calculateCmv(Parameters params, Point[] points) {
         boolean[] cmv = new boolean[15];
         for (int i = 0; i != 15; ++i) {
             cmv[i] = Lics.lics[i].check(params, points);
