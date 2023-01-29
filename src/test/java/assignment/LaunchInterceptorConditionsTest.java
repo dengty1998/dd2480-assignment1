@@ -53,11 +53,17 @@ public class LaunchInterceptorConditionsTest {
         int[][] points = {{1, 0}, {0, 10}, {0, 1}, {10, 10}, {1, 0}, {1, 1}, {10, 0}, {1, 1}};
         int numpoints = points.length;
         //
-        Assert.assertEquals(LaunchInterceptorConditions.ConditionEight(0,2, 10.0, numpoints, points), false);
+        Assert.assertEquals(
+                        LaunchInterceptorConditions.ConditionEight(0, 2, 10.0, numpoints, points),
+                        false);
         //
-        Assert.assertEquals(LaunchInterceptorConditions.ConditionEight(1,2, 10.0, numpoints, points), false);
+        Assert.assertEquals(
+                        LaunchInterceptorConditions.ConditionEight(1, 2, 10.0, numpoints, points),
+                        false);
         //
-        Assert.assertEquals(LaunchInterceptorConditions.ConditionEight(1,2, 1.0, numpoints, points), true);
+        Assert.assertEquals(
+                        LaunchInterceptorConditions.ConditionEight(1, 2, 1.0, numpoints, points),
+                        true);
     }
 
     @Test
@@ -65,11 +71,15 @@ public class LaunchInterceptorConditionsTest {
         int[][] points = {{1, 0}, {0, 10}, {1, 1}, {10, 0}, {1, 0}, {0, 1}, {10, 10}, {0, 0}};
         int numpoints = points.length;
         //
-        Assert.assertEquals(LaunchInterceptorConditions.ConditionNine(0,2, 1.0, numpoints, points), false);
+        Assert.assertEquals(LaunchInterceptorConditions.ConditionNine(0, 2, 1.0, numpoints, points),
+                        false);
         //
-        Assert.assertEquals(LaunchInterceptorConditions.ConditionNine(1,2, 1.0, numpoints, points), true);
+        Assert.assertEquals(LaunchInterceptorConditions.ConditionNine(1, 2, 1.0, numpoints, points),
+                        true);
         //
-        Assert.assertEquals(LaunchInterceptorConditions.ConditionNine(1,2, 10.0, numpoints, points), false);
+        Assert.assertEquals(
+                        LaunchInterceptorConditions.ConditionNine(1, 2, 10.0, numpoints, points),
+                        false);
     }
 
     @Test
@@ -77,11 +87,15 @@ public class LaunchInterceptorConditionsTest {
         int[][] points = {{1, 0}, {0, 10}, {1, 1}, {10, 0}, {1, 0}, {0, 1}, {10, 10}, {0, 0}};
         int numpoints = points.length;
         //
-        Assert.assertEquals(LaunchInterceptorConditions.ConditionTen(0,2, 10.0, numpoints, points), false);
+        Assert.assertEquals(LaunchInterceptorConditions.ConditionTen(0, 2, 10.0, numpoints, points),
+                        false);
         //
-        Assert.assertEquals(LaunchInterceptorConditions.ConditionTen(1,2, 10.0, numpoints, points), true);
+        Assert.assertEquals(LaunchInterceptorConditions.ConditionTen(1, 2, 10.0, numpoints, points),
+                        true);
         //
-        Assert.assertEquals(LaunchInterceptorConditions.ConditionTen(1,2, 100.0, numpoints, points), false);
+        Assert.assertEquals(
+                        LaunchInterceptorConditions.ConditionTen(1, 2, 100.0, numpoints, points),
+                        false);
     }
 
     @Test
@@ -91,10 +105,13 @@ public class LaunchInterceptorConditionsTest {
         int numpoints1 = points1.length;
         int numpoints2 = points2.length;
         //
-        Assert.assertEquals(LaunchInterceptorConditions.ConditionEleven(0, numpoints1, points1), false);
+        Assert.assertEquals(LaunchInterceptorConditions.ConditionEleven(0, numpoints1, points1),
+                        false);
         //
-        Assert.assertEquals(LaunchInterceptorConditions.ConditionEleven(1, numpoints1, points1), true);
+        Assert.assertEquals(LaunchInterceptorConditions.ConditionEleven(1, numpoints1, points1),
+                        true);
         //
-        Assert.assertEquals(LaunchInterceptorConditions.ConditionEleven(1, numpoints2, points2), false);
+        Assert.assertEquals(LaunchInterceptorConditions.ConditionEleven(1, numpoints2, points2),
+                        false);
     }
 }
