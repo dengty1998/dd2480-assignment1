@@ -52,15 +52,15 @@ public class LaunchInterceptorConditionsTest {
     public void testConditionEight() {
         int[][] points = {{1, 0}, {0, 10}, {0, 1}, {10, 10}, {1, 0}, {1, 1}, {10, 0}, {1, 1}};
         int numpoints = points.length;
-        //
+        // APTS is less than 1, then return false
         Assert.assertEquals(
                         LaunchInterceptorConditions.ConditionEight(0, 2, 10.0, numpoints, points),
                         false);
-        //
+        // RADIUS is so large that can't fit the given points
         Assert.assertEquals(
                         LaunchInterceptorConditions.ConditionEight(1, 2, 10.0, numpoints, points),
                         false);
-        //
+        // just as expected
         Assert.assertEquals(
                         LaunchInterceptorConditions.ConditionEight(1, 2, 1.0, numpoints, points),
                         true);
@@ -70,13 +70,13 @@ public class LaunchInterceptorConditionsTest {
     public void testConditionNine() {
         int[][] points = {{1, 0}, {0, 10}, {1, 1}, {10, 0}, {1, 0}, {0, 1}, {10, 10}, {0, 0}};
         int numpoints = points.length;
-        //
+        // CPTS is less than 1, then return false
         Assert.assertEquals(LaunchInterceptorConditions.ConditionNine(0, 2, 1.0, numpoints, points),
                         false);
-        //
+        // just as expected
         Assert.assertEquals(LaunchInterceptorConditions.ConditionNine(1, 2, 1.0, numpoints, points),
                         true);
-        //
+        // epsilon upper bound gives false
         Assert.assertEquals(
                         LaunchInterceptorConditions.ConditionNine(1, 2, 10.0, numpoints, points),
                         false);
@@ -86,13 +86,13 @@ public class LaunchInterceptorConditionsTest {
     public void testConditionTen() {
         int[][] points = {{1, 0}, {0, 10}, {1, 1}, {10, 0}, {1, 0}, {0, 1}, {10, 10}, {0, 0}};
         int numpoints = points.length;
-        //
+        // EPTS is less than 1, then return false
         Assert.assertEquals(LaunchInterceptorConditions.ConditionTen(0, 2, 10.0, numpoints, points),
                         false);
-        //
+        // just as expected
         Assert.assertEquals(LaunchInterceptorConditions.ConditionTen(1, 2, 10.0, numpoints, points),
                         true);
-        //
+        // AREA is so large that can't fit the given points
         Assert.assertEquals(
                         LaunchInterceptorConditions.ConditionTen(1, 2, 100.0, numpoints, points),
                         false);
@@ -104,13 +104,13 @@ public class LaunchInterceptorConditionsTest {
         int[][] points2 = {{1, 0}, {0, 0}, {2, 0}};
         int numpoints1 = points1.length;
         int numpoints2 = points2.length;
-        //
+        // GPTS is less than 1, then return false
         Assert.assertEquals(LaunchInterceptorConditions.ConditionEleven(0, numpoints1, points1),
                         false);
-        //
+        // just as expected
         Assert.assertEquals(LaunchInterceptorConditions.ConditionEleven(1, numpoints1, points1),
                         true);
-        //
+        // in points2, {1, 0}[0] is less than {2, 0}[0], then return false
         Assert.assertEquals(LaunchInterceptorConditions.ConditionEleven(1, numpoints2, points2),
                         false);
     }
