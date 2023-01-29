@@ -3,6 +3,9 @@ package assignment;
 public class LaunchInterceptorConditions {
 
     public static boolean ConditionZero(double LENGTH1, int[][] POINTS) {
+        if (LENGTH1 <= 0) {
+            return false;
+        }
         for (int i = 0; i < POINTS.length - 1; i++) {
             if (HelperFunction.calculateDistance(POINTS[i], POINTS[i + 1]) > LENGTH1) {
                 return true;
@@ -12,7 +15,9 @@ public class LaunchInterceptorConditions {
     }
 
     public static boolean ConditionOne(double RADIUS1, int[][] POINTS) {
-
+        if (RADIUS1 <= 0) {
+            return false;
+        }
         for (int i = 0; i < POINTS.length - 2; i++) {
             if (!HelperFunction.checkTriangelFitCircle(POINTS[i], POINTS[i + 1], POINTS[i + 2],
                             RADIUS1)) {
@@ -22,7 +27,10 @@ public class LaunchInterceptorConditions {
         return false;
     }
 
-    public static boolean Conditiontwo(double EPSILON, int[][] POINTS) {
+    public static boolean ConditionTwo(double EPSILON, int[][] POINTS) {
+        if (EPSILON <= 0 || EPSILON >= Math.PI) {
+            return false;
+        }
         for (int i = 0; i < POINTS.length - 2; i++) {
             if (HelperFunction.checkAngle(POINTS[i], POINTS[i + 1], POINTS[i + 2], EPSILON)) {
                 return true;
@@ -32,6 +40,9 @@ public class LaunchInterceptorConditions {
     }
 
     public static boolean ConditionThree(double AREA1, int[][] POINTS) {
+        if (AREA1 <= 0) {
+            return false;
+        }
         for (int i = 0; i < POINTS.length - 2; i++) {
             if (HelperFunction.checkArea(POINTS[i], POINTS[i + 1], POINTS[i + 2], AREA1)) {
                 return true;
