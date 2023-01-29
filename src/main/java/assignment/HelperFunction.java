@@ -1,34 +1,29 @@
 package assignment;
 
 public class HelperFunction {
-    public static double calculateDistance(int[] point1, int[] point2) {
-        int x1 = point1[0];
-        int y1 = point1[1];
-        int x2 = point2[0];
-        int y2 = point2[1];
+    public static double calculateDistance(double[] point1, double[] point2) {
+        double x1 = point1[0];
+        double y1 = point1[1];
+        double x2 = point2[0];
+        double y2 = point2[1];
         return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
     }
 
-    public static boolean checkTriangelFitCircle(int[] point1, int[] point2, int[] point3,
-                    double radius) {
-        double a = point1[0] - point3[0];
-        double b = point2[0] - point3[0];
-        double c = point1[1] - point3[1];
-        double d = point2[1] - point3[1];
-        double e = ((point1[0] * point1[0] - point3[0] * point3[0])
-                        + (point1[1] * point1[1] - point3[1] * point3[1])) / 2.0;
-        double f = ((point2[0] * point2[0] - point3[0] * point3[0])
-                        + (point2[1] * point2[1] - point3[1] * point3[1])) / 2.0;
-        double det = a * d - b * c;
-        double xcirc = (d * e - b * f) / det;
-        double ycirc = (a * f - c * e) / det;
-        double r = Math.sqrt((point1[0] - xcirc) * (point1[0] - xcirc)
-                        + (point1[1] - ycirc) * (point1[1] - ycirc));
-
+    public static boolean checkTriangelFitCircle(double[] point1,
+                                                 double[] point2,
+                                                 double[] point3,
+                                                 double radius) {
+        double a = calculateDistance(point1, point2);
+        double b = calculateDistance(point2, point3);
+        double c = calculateDistance(point3, point1);
+        double r = a * b * c / Math.sqrt((a + b + c) * (a + b - c) * (a - b + c) * (-a + b + c));
         return r <= radius;
     }
 
-    public static boolean checkAngle(int[] point1, int[] point2, int[] point3, double EPSILON) {
+    public static boolean checkAngle(double[] point1,
+                                     double[] point2,
+                                     double[] point3,
+                                     double EPSILON) {
         // point1, point2 and point3 create a triangle, for each angle if angle is less than
         // (pi-epsilon) or greater than (pi+epsilon) return true
         double angle1 = Math.atan2(point2[1] - point1[1], point2[0] - point1[0])
@@ -49,11 +44,13 @@ public class HelperFunction {
         return false;
     }
 
-    public static boolean checkArea(int[] point1, int[] point2, int[] point3, double AREA1) {
-        double area = Math.abs(
-                        (point1[0] * (point2[1] - point3[1]) + point2[0] * (point3[1] - point1[1])
-                                        + point3[0] * (point1[1] - point2[1])) / 2.0);
-        System.out.println(area);
+    public static boolean checkArea(double[] point1,
+                                    double[] point2,
+                                    double[] point3,
+                                    double AREA1) {
+        double area =
+            Math.abs((point1[0] * (point2[1] - point3[1]) + point2[0] * (point3[1] - point1[1])
+                            + point3[0] * (point1[1] - point2[1])) / 2.0);
         return area > AREA1;
     }
 }

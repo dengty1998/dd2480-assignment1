@@ -1,0 +1,125 @@
+package assignment;
+
+import org.junit.Assert;
+import org.junit.Test;
+
+public class LicsTest {
+    private Lic lic;
+    private ParametersBuilder builder;
+    private double[][] points;
+
+    private void assertFalse() {
+        Assert.assertFalse(lic.check(builder.build(points.length), points));
+    }
+
+    private void assertTrue() {
+        Assert.assertTrue(lic.check(builder.build(points.length), points));
+    }
+
+    @Test
+    public void testLic0() {
+        lic = Lics.lics[0];
+        builder = new ParametersBuilder();
+        points = new double[][] {{0.01, 0.01}, {0, 0}, {0, 1}, {1, 1}, {1, 0}};
+        // length 1 is greater than the length of the given points so it should return false
+        builder.length1 = 1.0;
+        assertFalse();
+        // length 0.5 is less than the length of the given points so it should return true
+        builder.length1 = 0.5;
+        assertTrue();
+    }
+
+    @Test
+    public void testLic1() {
+        lic = Lics.lics[1];
+        builder = new ParametersBuilder();
+        points = new double[][] {{0.01, 0.01}, {0, 0}, {0, 1}, {1, 1}, {1, 0}};
+        // radius 1 can fit the given points so it should return false
+        builder.radius1 = 1.0;
+        assertFalse();
+        // radius 0.5 cannot fit the given points so it should return true
+        builder.radius1 = 0.1;
+        assertTrue();
+    }
+
+    @Test
+    public void testLic2() {
+        lic = Lics.lics[2];
+        builder = new ParametersBuilder();
+        points = new double[][] {{0.01, 0.01}, {0, 0}, {0, 1}, {1, 1}, {1, 0}};
+        // epsilon 1 gives true with the given points
+        builder.epsilon = 1.0;
+        assertTrue();
+    }
+
+    @Test
+    public void testLic3() {
+        lic = Lics.lics[3];
+        builder = new ParametersBuilder();
+        points = new double[][] {{0.01, 0.01}, {0, 0}, {0, 4}, {4, 4}, {4, 0}};
+        // area 1 is less than the area of the given points so it should return true
+        builder.area1 = 1.0;
+        assertTrue();
+        // area 10 is greater than the area of the given points so it should return false
+        builder.area1 = 10.0;
+        assertFalse();
+    }
+
+    @Test
+    public void testLic8() {
+        lic = Lics.lics[8];
+        builder = new ParametersBuilder();
+        points =
+            new double[][] {{1, 0}, {0, 10}, {0, 1}, {10, 10}, {1, 0}, {1, 1}, {10, 0}, {1, 1}};
+        builder.a_pts = 1;
+        builder.b_pts = 2;
+        // RADIUS is so large that can't fit the given points
+        builder.radius1 = 10.0;
+        assertFalse();
+        // just as expected
+        builder.radius1 = 1.0;
+        assertTrue();
+    }
+
+    @Test
+    public void testLic9() {
+        lic = Lics.lics[9];
+        builder = new ParametersBuilder();
+        points =
+            new double[][] {{1, 0}, {0, 10}, {1, 1}, {10, 0}, {1, 0}, {0, 1}, {10, 10}, {0, 0}};
+        builder.c_pts = 1;
+        builder.d_pts = 2;
+        // just as expected
+        builder.epsilon = 1.0;
+        assertTrue();
+    }
+
+    @Test
+    public void testLic10() {
+        lic = Lics.lics[10];
+        builder = new ParametersBuilder();
+        points =
+            new double[][] {{1, 0}, {0, 10}, {1, 1}, {10, 0}, {1, 0}, {0, 1}, {10, 10}, {0, 0}};
+        builder.e_pts = 1;
+        builder.f_pts = 2;
+        // just as expected
+        builder.area1 = 10.0;
+        assertTrue();
+        // AREA is so large that can't fit the given points
+        builder.area1 = 100.0;
+        assertFalse();
+    }
+
+    @Test
+    public void testLic11() {
+        lic = Lics.lics[11];
+        builder = new ParametersBuilder();
+        builder.g_pts = 1;
+        // just as expected
+        points = new double[][] {{0, 0}, {0, 0}, {2, 0}, {0, 0}, {1, 0}};
+        assertTrue();
+        // {1, 0}[0] is less than {2, 0}[0], then return false
+        points = new double[][] {{0, 0}, {0, 0}, {1, 0}, {0, 0}, {2, 0}};
+        assertFalse();
+    }
+}
