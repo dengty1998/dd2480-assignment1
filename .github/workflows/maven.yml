@@ -17,3 +17,5 @@ jobs:
         cache: maven
     - name: Build and test with Maven
       run: mvn -B verify --file pom.xml
+    - name: Check documentation formatting with Maven and Javadoc
+      run: mvn -B javadoc:javadoc --file pom.xml

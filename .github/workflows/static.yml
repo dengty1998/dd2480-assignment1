@@ -26,7 +26,7 @@ jobs:
           java-version: '11'
           distribution: 'temurin'
           cache: maven
-      - name: Build and test with Maven
+      - name: Generate documentation with Maven and Javadoc
         run: mvn -B javadoc:javadoc --file pom.xml
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
