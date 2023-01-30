@@ -62,10 +62,10 @@ public class Parameters {
         if (!(0 <= dist)) {
             throw new IllegalArgumentException("DIST should be >= 0.");
         }
-        if (!(3 <= n_pts && n_pts <= numpoints)) {
+        if (!(numpoints < 3) && !(3 <= n_pts && n_pts <= numpoints)) {
             throw new IllegalArgumentException("N_PTS should be >= 3 and <= NUMPOINTS.");
         }
-        if (!(1 <= k_pts && k_pts <= numpoints - 2)) {
+        if (!(numpoints < 3) && !(1 <= k_pts && k_pts <= numpoints - 2)) {
             throw new IllegalArgumentException("K_PTS should be >= 1 and <= NUMPOINTS-2.");
         }
         if (!(1 <= a_pts)) {
@@ -74,7 +74,7 @@ public class Parameters {
         if (!(1 <= b_pts)) {
             throw new IllegalArgumentException("B_PTS should be >= 1.");
         }
-        if (!(a_pts + b_pts <= numpoints - 3)) {
+        if (!(numpoints < 5) && !(a_pts + b_pts <= numpoints - 3)) {
             throw new IllegalArgumentException("A_PTS + B_PTS should be <= NUMPOINTS-3.");
         }
         if (!(1 <= c_pts)) {
@@ -83,7 +83,7 @@ public class Parameters {
         if (!(1 <= d_pts)) {
             throw new IllegalArgumentException("D_PTS should be >= 1.");
         }
-        if (!(c_pts + d_pts <= numpoints - 3)) {
+        if (!(numpoints < 5) && !(c_pts + d_pts <= numpoints - 3)) {
             throw new IllegalArgumentException("C_PTS + D_PTS should be <= NUMPOINTS-3.");
         }
         if (!(1 <= e_pts)) {
@@ -92,10 +92,10 @@ public class Parameters {
         if (!(1 <= f_pts)) {
             throw new IllegalArgumentException("F_PTS should be >= 1.");
         }
-        if (!(e_pts + f_pts <= numpoints - 3)) {
+        if (!(numpoints < 5) && !(e_pts + f_pts <= numpoints - 3)) {
             throw new IllegalArgumentException("E_PTS + F_PTS should be <= NUMPOINTS-3.");
         }
-        if (!(1 <= g_pts && g_pts <= numpoints - 2)) {
+        if (!(numpoints < 3) && !(1 <= g_pts && g_pts <= numpoints - 2)) {
             throw new IllegalArgumentException("G_PTS should be >= 1 and <= NUMPOINTS-2.");
         }
         if (!(0 <= length2)) {

@@ -2,119 +2,82 @@ package assignment;
 
 
 interface Lic {
-    boolean check(Parameters params, double[][] points);
+    boolean check(Parameters params, Point[] points);
 }
 
 
 public class Lics {
     public static final Lic[] lics = {(params, points) -> { /* LIC 0 */
         for (int i = 0; i < points.length - 1; i++) {
-            if (HelperFunction.calculateDistance(points[i], points[i + 1]) > params.LENGTH1) {
+            if (points[i].distanceTo(points[i + 1]) > params.LENGTH1) {
                 return true;
             }
         }
         return false;
     }, (params, points) -> { /* LIC 1 */
         for (int i = 0; i < points.length - 2; i++) {
-            if (!HelperFunction.checkTriangelFitCircle(points[i],
-                                                       points[i + 1],
-                                                       points[i + 2],
-                                                       params.RADIUS1)) {
+            if (points[i].circumcircleRadius(points[i + 1], points[i + 2]) > params.RADIUS1) {
                 return true;
             }
         }
         return false;
     }, (params, points) -> { /* LIC 2 */
         for (int i = 0; i < points.length - 2; i++) {
-            if (HelperFunction.checkAngle(points[i],
-                                          points[i + 1],
-                                          points[i + 2],
-                                          params.EPSILON)) {
+            Double a = points[i + 1].angle(points[i], points[i + 2]);
+            if (a != null && (a < Math.PI - params.EPSILON || Math.PI + params.EPSILON > a)) {
                 return true;
             }
         }
         return false;
     }, (params, points) -> { /* LIC 3 */
         for (int i = 0; i < points.length - 2; i++) {
-            if (HelperFunction.checkArea(points[i], points[i + 1], points[i + 2], params.AREA1)) {
+            if (points[i].triangleArea(points[i + 1], points[i + 2]) > params.AREA1) {
                 return true;
             }
         }
         return false;
     }, (params, points) -> { /* LIC 4 */
         for (int i = 0; i < points.length - params.Q_PTS + 1; i++) {
-            boolean[] FoundQuads = {false, false, false, false};
+            boolean[] quads = {false, false, false, false};
             for (int j = i; j < params.Q_PTS + i; j++) {
-                if (points[j][0] >= 0 && points[j][1] >= 0) {
-                    FoundQuads[0] = true;
-                }
-                if (points[j][0] < 0 && points[j][1] >= 0) {
-                    FoundQuads[1] = true;
-                }
-                if (points[j][0] <= 0 && points[j][1] < 0) {
-                    FoundQuads[2] = true;
-                }
-                if (points[j][0] > 0 && points[j][1] < 0) {
-                    FoundQuads[3] = true;
+                quads[points[j].quadrant()] = true;
+            }
+            int quadsCount = 0;
+            for (int j = 0; j < quads.length; j++) {
+                if (quads[j]) {
+                    quadsCount++;
                 }
             }
-
-            int QuadsWithPoints = 0;
-            for (int l = 0; l < FoundQuads.length; l++) {
-                if (FoundQuads[i]) {
-                    QuadsWithPoints++;
-                }
-            }
-            if (QuadsWithPoints > params.QUADS) {
+            if (quadsCount > params.QUADS) {
                 return true;
             }
         }
-
         return false;
     }, (params, points) -> { /* LIC 5 */
         for (int i = 1; i < points.length; i++) {
-            if (points[i][0] - points[i - 1][0] < 0) {
+            if (points[i].x - points[i - 1].x < 0) {
                 return true;
             }
         }
         return false;
     }, (params, points) -> { /* LIC 6 */
+        if (points.length < 3) {
+            return false;
+        }
         for (int i = 0; i < points.length - params.N_PTS; i++) {
-            // First loop changes the data set moving it from start of NUMPOINTS to end.
-            if (points[i][0] == points[i + params.N_PTS][0]
-                            && points[i][1] == points[i + params.N_PTS][1]) {
-                // checking to see if start and end points are the same
-
-                for (int j = i + 1; j < i + params.N_PTS - 1; j++) { // i is the start point so
-                                                                     // start on +1
-                    // -1 so that we don't waste time on end point
-                    // Second loop iterates through every point checking distance compared to DIST.
-                    if (HelperFunction.calculateDistance(points[i], points[j]) > params.DIST) {
-                        return true;
-                    }
-                }
-            } else {
-                double x1 = points[i][0];
-                double x2 = points[i + params.N_PTS][0];
-                double y1 = points[i][1];
-                double y2 = points[i + params.N_PTS][1];
-                double a = y2 - y1;
-                double b = x1 - x2;
-                double c = x2 * y1 - x1 * y2;
-                for (int j = i + 1; j < i + params.N_PTS; j++) {
-                    if (Math.abs((a * points[j][0] + b * points[j][1] + c)
-                                    / Math.sqrt(a * a + b * b)) > params.DIST) {
-                        return true;
-                    }
-
+            for (int j = i + 1; j < i + params.N_PTS - 1; j++) {
+                if (points[j].distanceToLine(points[i], points[i + params.N_PTS]) > params.DIST) {
+                    return true;
                 }
             }
         }
         return false;
     }, (params, points) -> { /* LIC 7 */
+        if (points.length < 3) {
+            return false;
+        }
         for (int i = 0; i < points.length - params.K_PTS - 1; i++) {
-            if (HelperFunction.calculateDistance(points[i],
-                                                 points[i + params.K_PTS + 1]) > params.LENGTH1) {
+            if (points[i].distanceTo(points[i + params.K_PTS + 1]) > params.LENGTH1) {
                 return true;
             }
         }
@@ -124,10 +87,9 @@ public class Lics {
             return false;
         }
         for (int i = 0; i < points.length - params.A_PTS - params.B_PTS - 2; i++) {
-            double[] point1 = points[i];
-            double[] point2 = points[i + params.A_PTS + 1];
-            double[] point3 = points[i + params.A_PTS + params.B_PTS + 2];
-            if (!HelperFunction.checkTriangelFitCircle(point1, point2, point3, params.RADIUS1)) {
+            Point a = points[i + params.A_PTS + 1];
+            Point b = points[i + params.A_PTS + params.B_PTS + 2];
+            if (points[i].circumcircleRadius(a, b) > params.RADIUS1) {
                 return true;
             }
         }
@@ -137,10 +99,10 @@ public class Lics {
             return false;
         }
         for (int i = 0; i < points.length - params.C_PTS - params.D_PTS - 2; i++) {
-            double[] point1 = points[i];
-            double[] point2 = points[i + params.C_PTS + 1];
-            double[] point3 = points[i + params.C_PTS + params.D_PTS + 2];
-            if (HelperFunction.checkAngle(point1, point2, point3, params.EPSILON)) {
+            Point b = points[i + params.C_PTS + 1];
+            Point c = points[i + params.C_PTS + params.D_PTS + 2];
+            Double a = b.angle(points[i], c);
+            if (a != null && (a < Math.PI - params.EPSILON || Math.PI + params.EPSILON > a)) {
                 return true;
             }
         }
@@ -150,10 +112,9 @@ public class Lics {
             return false;
         }
         for (int i = 0; i < points.length - params.E_PTS - params.F_PTS - 2; i++) {
-            double[] point1 = points[i];
-            double[] point2 = points[i + params.E_PTS + 1];
-            double[] point3 = points[i + params.E_PTS + params.F_PTS + 2];
-            if (HelperFunction.checkArea(point1, point2, point3, params.AREA1)) {
+            Point b = points[i + params.E_PTS + 1];
+            Point c = points[i + params.E_PTS + params.F_PTS + 2];
+            if (points[i].triangleArea(b, c) > params.AREA1) {
                 return true;
             }
         }
@@ -163,18 +124,18 @@ public class Lics {
             return false;
         }
         for (int i = 0; i < points.length - params.G_PTS - 1; i++) {
-            double[] point1 = points[i];
-            double[] point2 = points[i + params.G_PTS + 1];
-            if ((point2[0] - point1[0]) < 0) {
+            if (points[i + params.G_PTS + 1].x - points[i].x < 0) {
                 return true;
             }
         }
         return false;
     }, (params, points) -> { /* LIC 12 */
+        if (points.length < 3) {
+            return false;
+        }
         boolean ok = false;
         for (int i = 0; i < points.length - params.K_PTS - 1; ++i) {
-            if (HelperFunction.calculateDistance(points[i],
-                                                 points[i + params.K_PTS + 1]) > params.LENGTH1) {
+            if (points[i].distanceTo(points[i + params.K_PTS + 1]) > params.LENGTH1) {
                 ok = true;
                 break;
             }
@@ -183,8 +144,7 @@ public class Lics {
             return false;
         }
         for (int i = 0; i < points.length - params.K_PTS - 1; ++i) {
-            if (HelperFunction.calculateDistance(points[i],
-                                                 points[i + params.K_PTS + 1]) < params.LENGTH2) {
+            if (points[i].distanceTo(points[i + params.K_PTS + 1]) < params.LENGTH2) {
                 return true;
             }
         }
@@ -195,10 +155,9 @@ public class Lics {
         }
         boolean ok = false;
         for (int i = 0; i < points.length - params.A_PTS - params.B_PTS - 2; i++) {
-            double[] point1 = points[i];
-            double[] point2 = points[i + params.A_PTS + 1];
-            double[] point3 = points[i + params.A_PTS + params.B_PTS + 2];
-            if (!HelperFunction.checkTriangelFitCircle(point1, point2, point3, params.RADIUS1)) {
+            Point a = points[i + params.A_PTS + 1];
+            Point b = points[i + params.A_PTS + params.B_PTS + 2];
+            if (points[i].circumcircleRadius(a, b) > params.RADIUS1) {
                 ok = true;
                 break;
             }
@@ -207,10 +166,9 @@ public class Lics {
             return false;
         }
         for (int i = 0; i < points.length - params.A_PTS - params.B_PTS - 2; i++) {
-            double[] point1 = points[i];
-            double[] point2 = points[i + params.A_PTS + 1];
-            double[] point3 = points[i + params.A_PTS + params.B_PTS + 2];
-            if (HelperFunction.checkTriangelFitCircle(point1, point2, point3, params.RADIUS2)) {
+            Point a = points[i + params.A_PTS + 1];
+            Point b = points[i + params.A_PTS + params.B_PTS + 2];
+            if (points[i].circumcircleRadius(a, b) <= params.RADIUS2) {
                 return true;
             }
         }
@@ -221,10 +179,9 @@ public class Lics {
         }
         boolean ok = false;
         for (int i = 0; i < points.length - params.E_PTS - params.F_PTS - 2; i++) {
-            double[] point1 = points[i];
-            double[] point2 = points[i + params.E_PTS + 1];
-            double[] point3 = points[i + params.E_PTS + params.F_PTS + 2];
-            if (HelperFunction.checkArea(point1, point2, point3, params.AREA1)) {
+            Point b = points[i + params.E_PTS + 1];
+            Point c = points[i + params.E_PTS + params.F_PTS + 2];
+            if (points[i].triangleArea(b, c) > params.AREA1) {
                 ok = true;
                 break;
             }
@@ -233,10 +190,9 @@ public class Lics {
             return false;
         }
         for (int i = 0; i < points.length - params.E_PTS - params.F_PTS - 2; i++) {
-            double[] point1 = points[i];
-            double[] point2 = points[i + params.E_PTS + 1];
-            double[] point3 = points[i + params.E_PTS + params.F_PTS + 2];
-            if (!HelperFunction.checkArea(point1, point2, point3, params.AREA2)) {
+            Point b = points[i + params.E_PTS + 1];
+            Point c = points[i + params.E_PTS + params.F_PTS + 2];
+            if (points[i].triangleArea(b, c) < params.AREA2) {
                 return true;
             }
         }

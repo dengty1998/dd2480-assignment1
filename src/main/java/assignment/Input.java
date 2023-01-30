@@ -2,7 +2,7 @@ package assignment;
 
 // Input for the decide function
 public class Input {
-    public final double[][] POINTS;
+    public final Point[] POINTS;
     public final Parameters PARAMS;
     public final Connect[][] LCM;
     public final boolean[] PUV;
@@ -40,7 +40,7 @@ public class Input {
         if (!(puv.length == 15)) {
             throw new IllegalArgumentException("PUV should be vector of 15 items.");
         }
-        POINTS = points;
+        POINTS = Point.makePoints(points);
         PARAMS = params;
         LCM = lcm;
         PUV = puv;
