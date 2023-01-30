@@ -39,6 +39,11 @@ mvn clean verify
 This command also runs all the tests and checks configured for the code.
 
 
+## Documentation
+
+The documentation is [available](https://dd2480-group14.github.io/Assignment-1/) online. It is generated via Javadoc from comments in the source code and deployed automatically after pull request merges into main branch.
+
+
 ## Code Style
 
 The code style is enforced by the build system. The file describing the formatting rules is `format.xml`, it is in the Eclipse file-format. The code style is based on [Google Java Style Guide](https://google.github.io/styleguide/javaguide.html) with indentation by 4 spaces instead of 2. You can use Maven to automatically apply the code style by running:
@@ -72,10 +77,11 @@ You can choose any open task on the project's GitHub Issues [page](https://githu
 - Implemented LIC 0-3
 - Provided tests for LIC 0-3
 
-### Chris Lundholm
+### Christoffer Lundholm
 
 - Implemented LIC 4-7 
 - Provided tests for LIC 4-7
+- Implemented PUM
 
 ### Tianyu Deng
 

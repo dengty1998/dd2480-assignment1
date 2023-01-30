@@ -1,11 +1,84 @@
 package assignment;
 
 
+/**
+ * The Launch Intercept Conditions (LICs) are the conditions that must be met for the launch to be
+ * successful. The Lic interface is a functional interface that takes the parameters and points as
+ * arguments and returns a boolean value.
+ */
 interface Lic {
+    /**
+     * @param params The parameters to use for the evaluation.
+     * @param points The points to use for the evaluation.
+     * @return true if the LIC evaluates to true, false otherwise.
+     */
     boolean check(Parameters params, Point[] points);
 }
 
 
+/**
+ * The Lics class contains an array of LaunchInterceptConditions that takes the parameters and
+ * points as arguments and returns a boolean value. The index of the LIC in the array corresponds to
+ * the LIC number.
+ *
+ * Lic 0: There exists at least one set of two consecutive data points such that the distance
+ * between those two data points is greater than LENGTH1.
+ * 
+ * Lic 1: There exists at least one set of three consecutive data points such that the three data
+ * points cannot be contained inside a circle with RADIUS1.
+ * 
+ * Lic 2: There exists at least one set of three consecutive data points such that the second angle
+ * between those three data points is less than or equal to EPSILON or greater than or equal to 2π −
+ * EPSILON.
+ *
+ * Lic 3: There exists at least one set of three consecutive data points such that the area of the
+ * triangle formed by those three data points is greater than AREA1.
+ *
+ * Lic 4: There exists at least one set of Q PTS consecutive data points that lie in more than QUADS
+ * quadrants.
+ *
+ * LIC 5: There exists at least one set of two consecutive data points, (X[i],Y[i]) and (X[j],Y[j]),
+ * such that X[j] - X[i] &lt; 0. (where i = j-1).
+ *
+ * LIC 6: There exists at least one set of N PTS consecutive data points such that at least one of
+ * the points lies a distance greater than DIST from the line joining the first and last of these N
+ * PTS points.
+ *
+ * LIC 7: There exists at least one set of two data points separated by exactly K PTS consecutive
+ * intervening points that are a distance greater than the length, LENGTH1, apart. The conditionis
+ * not met when NUMPOINTS &lt; 3.
+ * 
+ * LIC 8:There exists at least one set of three data points separated by exactly A PTS and B PTS
+ * consecutive intervening points, respectively, that cannot be contained within or on a circle of
+ * radius RADIUS1. The condition is not met when NUMPOINTS &lt; 5.
+ *
+ * LIC 9: There exists at least one set of three data points separated by exactly C PTS and D PTS
+ * consecutive intervening points, respectively, that form an angle such that angle &lt; (PI -
+ * EPSILON) or angle &gt; (PI + EPSILON). The condition is not met when NUMPOINTS &lt; 5.
+ * 
+ * LIC 10: There exists at least one set of three data points separated by exactly E PTS and F PTS
+ * consecutive intervening points, respectively, that are the vertices of a triangle with area
+ * greater than AREA1. The condition is not met when NUMPOINTS &lt; 5.
+ *
+ * LIC 11: There exists at least one set of two data points, (X[i],Y[i]) and (X[j],Y[j]), separated
+ * by exactly G PTS consecutive intervening points, such that X[j] - X[i] &lt; 0. (where i &lt; j )
+ * The condition is not met when NUMPOINTS &lt; 3.
+ *
+ * LIC 12: There exists at least one set of two data points, separated by exactly K PTS consecutive
+ * intervening points, which are a distance greater than the length, LENGTH1 and another set (or the
+ * same set) that is a distance less than the length, LENGTH2. The condition is not met when
+ * NUMPOINTS &lt; 3.
+ *
+ * LIC 13: There exists at least one set of three data points separated by exactly A PTS and B PTS
+ * consecutive intervening points, respectively, that cannot be contained within or on a circle of
+ * radius RADIUS1 and another set (or the same set) that can be contained within or on a circle of
+ * radius RADIUS2. The condition is not met when NUMPOINTS &lt; 5.
+ *
+ * LIC 14: There exists at least one set of three data points separated by exactly E PTS and F PTS
+ * consecutive intervening points, respectively, that are the vertices of a triangle with area
+ * greater than AREA1 and another set (or the same set) that are the vertices of a triangle with
+ * area less than AREA2. The condition is not met when NUMPOINTS &lt; 5.
+ */
 class Lics {
     static final Lic[] lics = {(params, points) -> { /* LIC 0 */
         for (int i = 0; i < points.length - 1; i++) {
@@ -24,7 +97,7 @@ class Lics {
     }, (params, points) -> { /* LIC 2 */
         for (int i = 0; i < points.length - 2; i++) {
             Double a = points[i + 1].angle(points[i], points[i + 2]);
-            if (a != null && (a < Math.PI - params.EPSILON || Math.PI + params.EPSILON > a)) {
+            if (a != null && (a < Math.PI - params.EPSILON || Math.PI + params.EPSILON < a)) {
                 return true;
             }
         }
@@ -102,7 +175,7 @@ class Lics {
             Point b = points[i + params.C_PTS + 1];
             Point c = points[i + params.C_PTS + params.D_PTS + 2];
             Double a = b.angle(points[i], c);
-            if (a != null && (a < Math.PI - params.EPSILON || Math.PI + params.EPSILON > a)) {
+            if (a != null && (a < Math.PI - params.EPSILON || Math.PI + params.EPSILON < a)) {
                 return true;
             }
         }
