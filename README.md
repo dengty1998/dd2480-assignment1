@@ -68,6 +68,7 @@ You can choose any open task on the project's GitHub Issues [page](https://githu
 
 - Created initial file structure
 - Created LIC file with initial template functions
+- Implemented HelperFunction
 - Implemented LIC 0-3
 - Provided tests for LIC 0-3
 
