@@ -61,6 +61,9 @@ class Lics {
         }
         return false;
     }, (params, points) -> { /* LIC 6 */
+        if (points.length < 3) {
+            return false;
+        }
         for (int i = 0; i < points.length - params.N_PTS; i++) {
             for (int j = i + 1; j < i + params.N_PTS - 1; j++) {
                 if (points[j].distanceToLine(points[i], points[i + params.N_PTS]) > params.DIST) {
@@ -70,6 +73,9 @@ class Lics {
         }
         return false;
     }, (params, points) -> { /* LIC 7 */
+        if (points.length < 3) {
+            return false;
+        }
         for (int i = 0; i < points.length - params.K_PTS - 1; i++) {
             if (points[i].distanceTo(points[i + params.K_PTS + 1]) > params.LENGTH1) {
                 return true;
@@ -124,6 +130,9 @@ class Lics {
         }
         return false;
     }, (params, points) -> { /* LIC 12 */
+        if (points.length < 3) {
+            return false;
+        }
         boolean ok = false;
         for (int i = 0; i < points.length - params.K_PTS - 1; ++i) {
             if (points[i].distanceTo(points[i + params.K_PTS + 1]) > params.LENGTH1) {
