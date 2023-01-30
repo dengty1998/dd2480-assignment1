@@ -1,13 +1,13 @@
 package assignment;
 
 // Input for the decide function
-public class Input {
-    public final Point[] POINTS;
-    public final Parameters PARAMS;
-    public final Connect[][] LCM;
-    public final boolean[] PUV;
+class Input {
+    final Point[] POINTS;
+    final Parameters PARAMS;
+    final Connect[][] LCM;
+    final boolean[] PUV;
 
-    public static enum Connect {
+    static enum Connect {
         ANDD, ORR, NOTUSED;
     }
 

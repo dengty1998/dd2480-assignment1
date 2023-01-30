@@ -2,8 +2,8 @@ package assignment;
 
 import assignment.Input.Connect;
 
-public class Main {
-    public static void main(String[] args) {
+class Main {
+    static void main(String[] args) {
         double[][] points = new double[50][2];
         for (int i = 0; i != points.length; ++i) {
             points[i][0] = i;

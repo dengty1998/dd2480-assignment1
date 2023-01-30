@@ -6,8 +6,8 @@ interface Lic {
 }
 
 
-public class Lics {
-    public static final Lic[] lics = {(params, points) -> { /* LIC 0 */
+class Lics {
+    static final Lic[] lics = {(params, points) -> { /* LIC 0 */
         for (int i = 0; i < points.length - 1; i++) {
             if (points[i].distanceTo(points[i + 1]) > params.LENGTH1) {
                 return true;
