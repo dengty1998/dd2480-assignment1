@@ -1,25 +1,25 @@
 package assignment;
 
 public class ParametersBuilder {
-    double length1;
-    double radius1;
-    double epsilon;
-    double area1;
-    int q_pts;
-    int quads;
-    double dist;
-    int n_pts;
-    int k_pts;
-    int a_pts;
-    int b_pts;
-    int c_pts;
-    int d_pts;
-    int e_pts;
-    int f_pts;
-    int g_pts;
-    double length2;
-    double radius2;
-    double area2;
+    public double length1;
+    public double radius1;
+    public double epsilon;
+    public double area1;
+    public int q_pts;
+    public int quads;
+    public double dist;
+    public int n_pts;
+    public int k_pts;
+    public int a_pts;
+    public int b_pts;
+    public int c_pts;
+    public int d_pts;
+    public int e_pts;
+    public int f_pts;
+    public int g_pts;
+    public double length2;
+    public double radius2;
+    public double area2;
 
     public ParametersBuilder() {
         length1 = 0.0;
