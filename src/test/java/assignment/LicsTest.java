@@ -47,7 +47,8 @@ public class LicsTest {
         lic = Lics.lics[2];
         builder = new ParametersBuilder();
         points = new double[][] {{0, 0}, {0, 1}, {1, 1}, {0.01, 0.01}};
-        // just as expected, the angle made by points[1][2][3] is almost pi/4 (which fits), another angle is pi/2
+        // just as expected, the angle made by points[1][2][3] is almost pi/4 (which fits), another
+        // angle is pi/2
         builder.epsilon = 2.0;
         assertTrue();
         // since pi - 3 < pi/4, the result should be false
@@ -93,7 +94,8 @@ public class LicsTest {
             new double[][] {{1, 0}, {0, 10}, {1, 1}, {10, 0}, {1, 0}, {0, 1}, {10, 10}, {0, 0}};
         builder.c_pts = 1;
         builder.d_pts = 2;
-        // just as expected, the angle made by points[1][3][6] is pi/4 (which fits), other angles are pi/2
+        // just as expected, the angle made by points[1][3][6] is pi/4 (which fits), other angles
+        // are pi/2
         builder.epsilon = 2.0;
         assertTrue();
         // since pi - 3 < pi/4, the result should be false
