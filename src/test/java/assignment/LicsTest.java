@@ -27,7 +27,6 @@ public class LicsTest {
         // length 0.5 is less than the length of the given points so it should return true
         builder.length1 = 0.5;
         assertTrue();
-
     }
 
     @Test
@@ -51,7 +50,6 @@ public class LicsTest {
         // epsilon 1 gives true with the given points
         builder.epsilon = 1.0;
         assertTrue();
-
     }
 
     @Test
