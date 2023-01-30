@@ -27,6 +27,7 @@ public class LicsTest {
         // length 0.5 is less than the length of the given points so it should return true
         builder.length1 = 0.5;
         assertTrue();
+
     }
 
     @Test
@@ -37,7 +38,7 @@ public class LicsTest {
         // radius 1 can fit the given points so it should return false
         builder.radius1 = 1.0;
         assertFalse();
-        // radius 0.5 cannot fit the given points so it should return true
+        // radius 0.1 cannot fit the given points so it should return true
         builder.radius1 = 0.1;
         assertTrue();
     }
@@ -50,6 +51,7 @@ public class LicsTest {
         // epsilon 1 gives true with the given points
         builder.epsilon = 1.0;
         assertTrue();
+
     }
 
     @Test
