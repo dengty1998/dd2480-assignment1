@@ -1,6 +1,6 @@
 package assignment;
 
-class ParametersBuilder {
+public class ParametersBuilder {
     double length1;
     double radius1;
     double epsilon;

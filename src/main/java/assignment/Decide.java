@@ -1,6 +1,6 @@
 package assignment;
 
-class Decide {
+public class Decide {
     static boolean decide(Input input) {
         boolean[] cmv = calculateCmv(input.PARAMS, input.POINTS);
         boolean[][] pum = calculatePum(cmv, input.LCM);

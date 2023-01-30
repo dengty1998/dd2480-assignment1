@@ -1,7 +1,7 @@
 package assignment;
 
 // Input for the decide function
-class Input {
+public class Input {
     final Point[] POINTS;
     final Parameters PARAMS;
     final Connect[][] LCM;

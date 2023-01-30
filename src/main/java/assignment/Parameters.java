@@ -1,6 +1,6 @@
 package assignment;
 
-class Parameters {
+public class Parameters {
     final double LENGTH1;
     final double RADIUS1;
     final double EPSILON;
