@@ -6,8 +6,8 @@ interface Lic {
 }
 
 
-public class Lics {
-    public static final Lic[] lics = {(params, points) -> { /* LIC 0 */
+class Lics {
+    static final Lic[] lics = {(params, points) -> { /* LIC 0 */
         for (int i = 0; i < points.length - 1; i++) {
             if (points[i].distanceTo(points[i + 1]) > params.LENGTH1) {
                 return true;
@@ -24,7 +24,7 @@ public class Lics {
     }, (params, points) -> { /* LIC 2 */
         for (int i = 0; i < points.length - 2; i++) {
             Double a = points[i + 1].angle(points[i], points[i + 2]);
-            if (a != null && (a < Math.PI - params.EPSILON || Math.PI + params.EPSILON > a)) {
+            if (a != null && (a < Math.PI - params.EPSILON || Math.PI + params.EPSILON < a)) {
                 return true;
             }
         }
@@ -102,7 +102,7 @@ public class Lics {
             Point b = points[i + params.C_PTS + 1];
             Point c = points[i + params.C_PTS + params.D_PTS + 2];
             Double a = b.angle(points[i], c);
-            if (a != null && (a < Math.PI - params.EPSILON || Math.PI + params.EPSILON > a)) {
+            if (a != null && (a < Math.PI - params.EPSILON || Math.PI + params.EPSILON < a)) {
                 return true;
             }
         }
