@@ -1,7 +1,7 @@
 package assignment;
 
 public class Decide {
-    static boolean decide(Input input) {
+    public static boolean decide(Input input) {
         boolean[] cmv = calculateCmv(input.PARAMS, input.POINTS);
         boolean[][] pum = calculatePum(cmv, input.LCM);
         boolean[] fuv = calculateFuv(pum, input.PUV);

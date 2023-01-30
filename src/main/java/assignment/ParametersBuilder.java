@@ -43,7 +43,7 @@ public class ParametersBuilder {
         area2 = 0.0;
     }
 
-    Parameters build(int numpoints) {
+    public Parameters build(int numpoints) {
         return new Parameters(numpoints,
                               length1,
                               radius1,

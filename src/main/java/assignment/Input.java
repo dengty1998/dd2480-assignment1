@@ -7,7 +7,7 @@ public class Input {
     final Connect[][] LCM;
     final boolean[] PUV;
 
-    static enum Connect {
+    public static enum Connect {
         ANDD, ORR, NOTUSED;
     }
 
