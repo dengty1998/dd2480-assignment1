@@ -27,18 +27,10 @@ public class Decide {
             for (int j = 0; j < 15; j++) {
                 switch (lcm[i][j]) {
                     case ANDD:
-                        if (cmv[i] && cmv[j]) {
-                            pum[i][j] = true;
-                        } else {
-                            pum[i][j] = false;
-                        }
+                        pum[i][j] = cmv[i] && cmv[j];
                         break;
                     case ORR:
-                        if (cmv[i] != cmv[j]) {
-                            pum[i][j] = true;
-                        } else {
-                            pum[i][j] = false;
-                        }
+                        pum[i][j] = cmv[i] || cmv[j];
                         break;
                     case NOTUSED:
                         pum[i][j] = true;
