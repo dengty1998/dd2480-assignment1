@@ -1,25 +1,25 @@
 package assignment;
 
 public class Parameters {
-    public final double LENGTH1;
-    public final double RADIUS1;
-    public final double EPSILON;
-    public final double AREA1;
-    public final int Q_PTS;
-    public final int QUADS;
-    public final double DIST;
-    public final int N_PTS;
-    public final int K_PTS;
-    public final int A_PTS;
-    public final int B_PTS;
-    public final int C_PTS;
-    public final int D_PTS;
-    public final int E_PTS;
-    public final int F_PTS;
-    public final int G_PTS;
-    public final double LENGTH2;
-    public final double RADIUS2;
-    public final double AREA2;
+    final double LENGTH1;
+    final double RADIUS1;
+    final double EPSILON;
+    final double AREA1;
+    final int Q_PTS;
+    final int QUADS;
+    final double DIST;
+    final int N_PTS;
+    final int K_PTS;
+    final int A_PTS;
+    final int B_PTS;
+    final int C_PTS;
+    final int D_PTS;
+    final int E_PTS;
+    final int F_PTS;
+    final int G_PTS;
+    final double LENGTH2;
+    final double RADIUS2;
+    final double AREA2;
 
     public Parameters(int numpoints,
                       double length1,
