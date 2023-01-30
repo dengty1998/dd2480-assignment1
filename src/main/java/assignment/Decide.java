@@ -22,8 +22,34 @@ public class Decide {
     }
 
     private static boolean[][] calculatePum(boolean[] cmv, Input.Connect[][] lcm) {
-        // TODO
-        return new boolean[15][15];
+        boolean[][] pum = new boolean[15][15];
+        for (int i = 0; i < 15; i++) {
+            for (int j = 0; j < 15; j++) {
+                switch (lcm[i][j]) {
+                    case ANDD:
+                        if (cmv[i] && cmv[j]) {
+                            pum[i][j] = true;
+                        } else {
+                            pum[i][j] = false;
+                        }
+                        break;
+                    case ORR:
+                        if (cmv[i] != cmv[j]) {
+                            pum[i][j] = true;
+                        } else {
+                            pum[i][j] = false;
+                        }
+                        break;
+                    case NOTUSED:
+                        pum[i][j] = true;
+                        break;
+                    default:
+
+                        break;
+                }
+            }
+        }
+        return pum;
     }
 
     private static boolean[] calculateFuv(boolean[][] pum, boolean[] puv) {
