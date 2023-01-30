@@ -20,6 +20,11 @@
       <version>4.13.2</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>org.json</groupId>
+      <artifactId>json</artifactId>
+      <version>20220924</version>
+    </dependency>
   </dependencies>
   <build>
     <plugins>
@@ -55,14 +60,31 @@
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-jar-plugin</artifactId>
-        <version>3.3.0</version>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>3.4.1</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+          </execution>
+        </executions>
         <configuration>
-          <archive>
-            <manifest>
+          <createDependencyReducedPom>false</createDependencyReducedPom>
+          <filters>
+            <filter>
+                <artifact>org.json:json</artifact>
+                <excludes>
+                    <exclude>META-INF/MANIFEST.MF</exclude>
+                </excludes>
+            </filter>
+          </filters>
+          <transformers>
+            <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
               <mainClass>assignment.Main</mainClass>
-            </manifest>
-          </archive>
+            </transformer>
+          </transformers>
         </configuration>
       </plugin>
     </plugins>
