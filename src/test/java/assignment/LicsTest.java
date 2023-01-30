@@ -70,6 +70,80 @@ public class LicsTest {
     }
 
     @Test
+    public void testLic4() {
+        lic = Lics.lics[4];
+        builder = new ParametersBuilder();
+        points = new double[][] {{0, 0}, {-1, 0}, {1, 0}, {1, 1}, {1, -1}};
+        builder.quads = 1;
+        builder.q_pts = 2;
+        assertTrue();
+        builder.quads = 2;
+        builder.q_pts = 3;
+        assertFalse();
+
+    }
+
+    @Test
+    public void testLic5a() {
+        lic = Lics.lics[5];
+        builder = new ParametersBuilder();
+        points = new double[][] {{1, 1}, {0, 1}, {1, 0}, {0, 1}, {-1, -1}};
+        assertTrue();
+
+    }
+
+    @Test
+    public void testLic5b() {
+        lic = Lics.lics[5];
+        builder = new ParametersBuilder();
+        points = new double[][] {{0, 0}, {0.2, 0.2}, {0.4, 0.4}, {0.6, 0, 6}, {0.8, 0.8}};
+        assertFalse();
+    }
+
+    @Test
+    public void testLic6a() {
+        lic = Lics.lics[6];
+        builder = new ParametersBuilder();
+        points = new double[][] {{1, 1}, {0, 1}, {1, 0}, {0, 1}, {-1, -1}};
+        builder.dist = 0;
+        builder.n_pts = 4;
+        assertTrue();
+        builder.dist = 10;
+        assertFalse();
+
+    }
+
+    @Test
+    public void testLic6b() {
+        lic = Lics.lics[6];
+        builder = new ParametersBuilder();
+        points = new double[][] {{1, 1}, {0, 0}};
+        assertFalse();
+
+    }
+
+    @Test
+    public void testLic7a() {
+        lic = Lics.lics[7];
+        builder = new ParametersBuilder();
+        points = new double[][] {{1, 1}, {0, 1}, {1, 0}, {0, 1}, {-1, -1}};
+        builder.length1 = 0.1;
+        assertTrue();
+        builder.length1 = 4;
+        assertFalse();
+
+    }
+
+    @Test
+    public void testLic7b() {
+        lic = Lics.lics[7];
+        builder = new ParametersBuilder();
+        points = new double[][] {{1, 1}, {0, 0}};
+        assertFalse();
+    }
+
+
+    @Test
     public void testLic8() {
         lic = Lics.lics[8];
         builder = new ParametersBuilder();
