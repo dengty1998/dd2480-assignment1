@@ -72,10 +72,11 @@ You can choose any open task on the project's GitHub Issues [page](https://githu
 - Implemented LIC 0-3
 - Provided tests for LIC 0-3
 
-### Chris Lundholm
+### Christoffer Lundholm
 
 - Implemented LIC 4-7 
 - Provided tests for LIC 4-7
+- Implemented PUM
 
 ### Tianyu Deng
 
