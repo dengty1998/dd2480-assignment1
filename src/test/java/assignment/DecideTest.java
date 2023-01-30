@@ -37,14 +37,14 @@ public class DecideTest {
     @Test
     public void DecideTrueInput() {
         points = new double[50][2];
-        // generate some different points
+        // generate some random points
         for (int i = 0; i != points.length; ++i) {
             points[i][0] = i * 10;
             points[i][1] = i * 10;
         }
         Parameters params = new Parameters(points.length,
-                                           0.5,
-                                           5,
+                                           0.1,
+                                           0.1,
                                            1,
                                            5,
                                            5,
@@ -66,13 +66,16 @@ public class DecideTest {
         lcm = new Input.Connect[15][15];
         for (int i = 0; i != 15; ++i) {
             for (int j = 0; j != 15; ++j) {
-                lcm[i][j] = Input.Connect.ANDD;
+                lcm[i][j] = Input.Connect.NOTUSED;
             }
         }
+        lcm[0][0] = Input.Connect.ANDD;
         boolean[] puv = new boolean[15];
         for (int i = 0; i != 15; ++i) {
             puv[i] = false;
         }
+        puv[0] = true;
+        puv[1] = true;
 
         input = new Input(points.length, points, params, lcm, puv);
         Assert.assertTrue(Decide.decide(input));
