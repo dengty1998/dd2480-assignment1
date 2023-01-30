@@ -43,9 +43,6 @@ public class Decide {
                     case NOTUSED:
                         pum[i][j] = true;
                         break;
-                    default:
-
-                        break;
                 }
             }
         }
