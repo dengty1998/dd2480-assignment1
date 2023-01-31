@@ -71,6 +71,8 @@ You can choose any open task on the project's GitHub Issues [page](https://githu
 
 ## Statement of Contributions
 
+We think we have done something remarkable. We have established a clear structure of work, for example there was an instance of attempt to directly push a commit to main while it was not working so it was rejected. Otherwise this would have disrupted the work for the rest of the team. We implemented automatic documentation generation and deployment to github pages. Github actions was used to check the code and documentation comments automatically. 
+
 ### Aleksey Veresov
 
 - Set up Maven
@@ -99,3 +101,28 @@ You can choose any open task on the project's GitHub Issues [page](https://githu
 - Implemented FUV
 - Implemented LIC 8-11
 - Provided tests for LIC 8-11
+
+
+## Way of Working
+
+We estimate our way of working to be at "In Place" level.
+
+### Principles Established
+
+We decided on a system where we could work independently on issues.
+
+### Foundations Established
+
+We used slack for general communication purposes and we used github issues for keeping track of tasks. We agreed on that the main branch should be in a working state so everyone can easily start working on new tasks. To ensure this we utilized github actions to check the code and apply tests on it before a pull request can be merged into main. We prohibited direct pushes to main and required at least one approval on pull requests before it could be merged.
+
+### In Use
+
+The practices and tools were indeed being used to do real work.
+
+### In Place
+
+All of the team members used the aforementioned process. 
+
+### Working Well
+
+There were sometimes issues for example merge conflicts.
