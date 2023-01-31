@@ -39,6 +39,17 @@ mvn clean verify
 This command also runs all the tests and checks configured for the code.
 
 
+## Running the Executable
+
+You can execute generated jar by:
+
+```
+java -jar ./target/assignment-1.0-SNAPSHOT.jar
+```
+
+It will load input data from file at path `./input.json`. `input.json` in the repository contains sample input.
+
+
 ## Documentation
 
 The documentation is [available](https://dd2480-group14.github.io/Assignment-1/) online. It is generated via Javadoc from comments in the source code and deployed automatically after pull request merges into main branch.
